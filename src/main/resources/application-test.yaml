@@ -1,0 +1,24 @@
+# datasource
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:transaction-analyzer-db
+    username: sa
+    password: 
+
+# jpa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+    defer-datasource-initialization: true
+
+# h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console

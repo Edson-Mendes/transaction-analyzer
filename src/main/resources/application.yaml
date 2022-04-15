@@ -1,0 +1,8 @@
+server:
+  error:
+    include-stacktrace: on-param
+
+spring: 
+  profiles:
+    active:
+    - test
