@@ -15,3 +15,6 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `Java 17`
 - `Maven`
 - `Spring Boot`
+- `H2 database`
+- `Thymeleaf`
+- `Lombok`

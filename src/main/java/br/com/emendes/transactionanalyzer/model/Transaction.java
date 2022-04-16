@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -14,8 +15,11 @@ public class Transaction {
 
   @Id
   private Long id;
-  // private Account originAccount;
-  // private Account destinationAccount;
+
+  @ManyToOne
+  private Account originAccount;
+  @ManyToOne
+  private Account destinationAccount;
   private BigDecimal value;
   private LocalDateTime dateTime;
 

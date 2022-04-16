@@ -2,6 +2,7 @@ package br.com.emendes.transactionanalyzer.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -10,6 +11,9 @@ import lombok.Data;
 public class Branch {
 
   @Id
-  private Integer number;
-  // private Bank bank;
+  private Integer id;
+
+  @ManyToOne
+  private Bank bank;
+
 }

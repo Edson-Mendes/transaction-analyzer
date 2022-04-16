@@ -11,6 +11,7 @@ public class Bank {
 
   @Id
   private Integer id;
+
   private String name;
 
 }
