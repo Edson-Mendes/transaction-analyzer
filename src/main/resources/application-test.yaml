@@ -6,6 +6,11 @@ spring:
     username: sa
     password: 
 
+# sql
+  sql:
+    init:
+      mode: always
+
 # jpa
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
