@@ -21,22 +21,14 @@ public class TransactionService {
 
   private final TransactionRepository transactionRepository;
 
+  private final TransactionImportService transactionImportService;
+
   public void saveAll(MultipartFile file) {
-    if (file.isEmpty()) {
-      // TODO: Pesquisar uma forma melhor de validar se está vazio
-      throw new RuntimeException("Empty file");
-    }
 
     List<String> transactionsLines = ReadFile.readMultipartFile(file);
-
     List<Transaction> transactions = generateTransactionsList(transactionsLines);
 
-    System.out.println("=======================================================");
-    transactions.forEach(System.out::println);
-    System.out.println("=======================================================");
-
-    transactionRepository.saveAll(transactions);
-
+    transactionImportService.save(transactionRepository.saveAll(transactions));
   }
 
   private List<Transaction> generateTransactionsList(List<String> transactionsLines) {

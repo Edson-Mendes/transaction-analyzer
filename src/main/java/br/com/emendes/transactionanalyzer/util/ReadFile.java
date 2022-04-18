@@ -16,6 +16,10 @@ public abstract class ReadFile {
    * @return Uma lista com as linhas do arquivo
    */
   public static List<String> readMultipartFile(MultipartFile file) {
+    if (file.isEmpty()) {
+      // TODO: Pesquisar uma forma melhor de validar se está vazio
+      throw new RuntimeException("Empty file");
+    }
     List<String> transactions = new ArrayList<>();
     try (Scanner input = new Scanner(file.getInputStream())) {
       while (input.hasNextLine()) {
