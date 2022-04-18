@@ -33,9 +33,4 @@ public abstract class ReadFile {
     return transactions;
   }
 
-  private static boolean validTransactionFields(String[] transactionFields) {
-    // TODO: deletar caso não seja usado
-    return false;
-  }
-
 }

@@ -29,4 +29,9 @@ public class TransactionImportService {
     transactionImportRepository.save(transactionImport);
   }
 
+  public List<TransactionsImport> read() {
+    // TODO: Buscar em ordem decrescente por data
+    return transactionImportRepository.findAll();
+  }
+
 }

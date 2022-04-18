@@ -32,7 +32,7 @@ public class TransactionController {
 
     transactionService.saveAll(file);
 
-    return "redirect:/transaction";
+    return "redirect:/home";
   }
 
 }

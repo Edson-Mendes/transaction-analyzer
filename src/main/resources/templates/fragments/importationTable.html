@@ -1,0 +1,18 @@
+<div th:unless="${transactionsImport.isEmpty}">
+  <h3>IMPORTAÇÕES REALIZADAS</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Data Transações</th>
+        <th>Data Importação</th>
+      </tr>
+      <tbody>
+        <tr th:each="import : ${transactionsImport}">
+          <!-- TODO: Formatar datas -->
+          <td><span th:text="${import.date}"></span></td>
+          <td><span th:text="${import.dateTime}"></span></td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+</div>
