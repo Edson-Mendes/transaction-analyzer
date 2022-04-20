@@ -23,6 +23,7 @@ public class HomeController {
     ModelAndView modelAndView = new ModelAndView("home.html");
 
     // TODO: Converter para um dto para enviar para /home
+    // TODO: Remover este controller se não for mais usado
     List<TransactionsImport> transactionsImport = transactionImportService.read();
     modelAndView.addObject("transactionsImport", transactionsImport);
 

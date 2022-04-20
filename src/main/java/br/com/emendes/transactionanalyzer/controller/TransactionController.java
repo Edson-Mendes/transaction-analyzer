@@ -1,38 +1,48 @@
 package br.com.emendes.transactionanalyzer.controller;
 
-import java.io.IOException;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import br.com.emendes.transactionanalyzer.model.TransactionsImport;
+import br.com.emendes.transactionanalyzer.service.TransactionImportService;
 import br.com.emendes.transactionanalyzer.service.TransactionService;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/transaction")
+@RequiredArgsConstructor
+@RequestMapping("/transactions")
 public class TransactionController {
 
-  @Autowired
-  private TransactionService transactionService;
+  private final TransactionService transactionService;
+  private final TransactionImportService transactionImportService;
 
   @GetMapping
-  public String transactionForm() {
-    return "transactionForm.html";
+  public ModelAndView home() {
+    ModelAndView modelAndView = new ModelAndView("home.html");
+
+    // TODO: Converter para um dto para enviar para /home
+    List<TransactionsImport> transactionsImport = transactionImportService.read();
+    modelAndView.addObject("transactionsImport", transactionsImport);
+
+    return modelAndView;
   }
 
   @PostMapping
   @Transactional
-  public String submitForm(@RequestParam("file") MultipartFile file) throws IOException {
+  public String submitForm(@RequestParam("file") MultipartFile file) {
 
     transactionService.saveAll(file);
 
-    return "redirect:/home";
+    return "redirect:/transactions";
   }
 
 }
