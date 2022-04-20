@@ -8,9 +8,8 @@
       </tr>
       <tbody>
         <tr th:each="import : ${transactionsImport}">
-          <!-- TODO: Formatar datas -->
-          <td><span th:text="${import.date}"></span></td>
-          <td><span th:text="${import.dateTime}"></span></td>
+          <td><span th:text="${#temporals.format(import.transactionsDate, 'dd/MM/yyyy')}"></span></td>
+          <td><span th:text="${#temporals.format(import.importDateTime, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
         </tr>
       </tbody>
     </thead>

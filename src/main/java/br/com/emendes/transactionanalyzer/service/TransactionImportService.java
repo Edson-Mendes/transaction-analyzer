@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.emendes.transactionanalyzer.model.Transaction;
@@ -22,16 +24,16 @@ public class TransactionImportService {
 
     TransactionsImport transactionImport = TransactionsImport.builder()
         .transactions(transactions)
-        .dateTime(LocalDateTime.now())
-        .date(transactionsDate)
+        .importDateTime(LocalDateTime.now())
+        .transactionsDate(transactionsDate)
         .build();
 
     transactionImportRepository.save(transactionImport);
   }
 
   public List<TransactionsImport> read() {
-    // TODO: Buscar em ordem decrescente por data
-    return transactionImportRepository.findAll();
+    Sort sort = Sort.by(Direction.DESC, "transactionsDate");
+    return transactionImportRepository.findAll(sort);
   }
 
 }

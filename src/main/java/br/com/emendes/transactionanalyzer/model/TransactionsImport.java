@@ -27,8 +27,8 @@ public class TransactionsImport {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private LocalDate date;
-  private LocalDateTime dateTime;
+  private LocalDate transactionsDate;
+  private LocalDateTime importDateTime;
 
   @OneToMany(fetch = FetchType.EAGER)
   private List<Transaction> transactions = new ArrayList<>();
