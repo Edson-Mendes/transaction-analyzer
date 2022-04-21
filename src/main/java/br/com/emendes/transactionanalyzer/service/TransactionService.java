@@ -11,20 +11,21 @@ import br.com.emendes.transactionanalyzer.util.ReadFile;
 import br.com.emendes.transactionanalyzer.util.TransactionUtil;
 import lombok.RequiredArgsConstructor;
 
+// TODO: deletar se não for mais usar
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
 
   private final TransactionRepository transactionRepository;
 
-  private final TransactionImportService transactionImportService;
+  private final TransactionsImportService transactionsImportService;
 
-  public void saveAll(MultipartFile file) {
-
+  public void processFile(MultipartFile file) {
+    // TODO: Devolver uma mensagem de sucesso.
     List<String> transactionsLines = ReadFile.readMultipartFile(file);
     List<Transaction> transactions = TransactionUtil.generateTransactionsList(transactionsLines);
 
-    transactionImportService.save(transactionRepository.saveAll(transactions));
+    // transactionImportService.save(transactionRepository.saveAll(transactions));
   }
 
 }

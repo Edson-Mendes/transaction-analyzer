@@ -13,8 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emendes.transactionanalyzer.model.TransactionsImport;
-import br.com.emendes.transactionanalyzer.service.TransactionImportService;
-import br.com.emendes.transactionanalyzer.service.TransactionService;
+import br.com.emendes.transactionanalyzer.service.TransactionsImportService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -22,15 +21,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/transactions")
 public class TransactionController {
 
-  private final TransactionService transactionService;
-  private final TransactionImportService transactionImportService;
+  private final TransactionsImportService transactionsImportService;
 
   @GetMapping
   public ModelAndView home() {
     ModelAndView modelAndView = new ModelAndView("home.html");
 
     // TODO: Converter para um dto para enviar para /home
-    List<TransactionsImport> transactionsImport = transactionImportService.read();
+    List<TransactionsImport> transactionsImport = transactionsImportService.findAll();
     modelAndView.addObject("transactionsImport", transactionsImport);
 
     return modelAndView;
@@ -40,7 +38,7 @@ public class TransactionController {
   @Transactional
   public String submitForm(@RequestParam("file") MultipartFile file) {
 
-    transactionService.saveAll(file);
+    transactionsImportService.processImport(file);
 
     return "redirect:/transactions";
   }
