@@ -5,6 +5,7 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+// TODO: Ainda não usado
 @Entity
 @Data
 public class Bank {

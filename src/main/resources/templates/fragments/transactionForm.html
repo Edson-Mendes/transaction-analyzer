@@ -1,7 +1,11 @@
 <div>
   <h2>IMPORTAR TRANSAÇÕES</h2>
+  <div
+    th:if="${not #strings.isEmpty(error)}"
+    th:insert="fragments/message"
+  ></div>
   <form method="post" enctype="multipart/form-data" action="/transactions">
-    <input type="file" name="file" accept=".csv" />
+    <input type="file" name="file" accept=".csv" required />
     <button type="submit">Importar</button>
   </form>
 </div>

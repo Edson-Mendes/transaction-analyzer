@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+// TODO: Ainda não usado
 @Entity
 @Data
 public class Account {
