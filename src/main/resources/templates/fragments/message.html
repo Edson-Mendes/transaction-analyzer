@@ -1,1 +1,9 @@
-<div th:text="${message.message}"></div>
+<!-- <div th:text="${message.message}"></div> -->
+<div
+  class="alert"
+  th:classappend="${message.type.value}"
+  role="alert"
+  th:text="${message.message}"
+>
+  Mensagem informado se deu certo ou errado a importação do arquivo.
+</div>
