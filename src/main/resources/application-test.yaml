@@ -28,9 +28,16 @@ spring:
       enabled: true
       path: /h2-console
   
+  servlet:
+    multipart:
+      max-file-size: 512KB
+      max-request-size: 512KB
+
+# log
 logging:
   level:
     org:
       hibernate:
         sql: DEBUG
         type: trace
+

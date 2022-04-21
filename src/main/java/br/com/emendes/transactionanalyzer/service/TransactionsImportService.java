@@ -2,7 +2,6 @@ package br.com.emendes.transactionanalyzer.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -35,11 +34,10 @@ public class TransactionsImportService {
   }
 
   public void processImport(MultipartFile file) {
-    // TODO: Devolver uma mensagem de sucesso.
     List<String> transactionsLines = ReadFile.readMultipartFile(file);
     List<Transaction> transactions = TransactionUtil.generateTransactionsList(transactionsLines);
 
-    // Verificar se já existe um import no banco de dados com essa data.
+    // Verifica se já existe um import no banco de dados com essa data.
     LocalDate transactionsDate = transactions.get(0).getDateTime().toLocalDate();
     if (transactionsImportRepository.existsByTransactionsDate(transactionsDate)) {
       String message = String.format("Já existe transações do dia %s",

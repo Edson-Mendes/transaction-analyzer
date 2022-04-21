@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.emendes.transactionanalyzer.model.Message;
+import br.com.emendes.transactionanalyzer.model.Type;
 import br.com.emendes.transactionanalyzer.validation.exception.EmptyFileException;
 
 @ControllerAdvice
@@ -12,7 +14,11 @@ public class EmptyFileExceptionHandler {
 
   @ExceptionHandler(value = EmptyFileException.class)
   public RedirectView handle(EmptyFileException exception, RedirectAttributes attributes) {
-    attributes.addFlashAttribute("error", exception.getMessage());
+    final Message message = Message.builder()
+        .type(Type.ERROR)
+        .message(exception.getMessage())
+        .build();
+    attributes.addFlashAttribute("message", message);
 
     return new RedirectView("/transactions");
   }
