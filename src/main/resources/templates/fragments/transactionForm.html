@@ -1,16 +1,15 @@
 <div>
-  <h2>IMPORTAR TRANSAÇÕES</h2>
+  <div class="d-flex justify-content-center">
+    <h2><b>IMPORTAR TRANSAÇÕES</b></h2>
+  </div>
   <div th:if="${message != null}" th:insert="fragments/message"></div>
   <form
-    class="row g-3"
+    class="row g-2"
     method="post"
     enctype="multipart/form-data"
     action="/transactions"
   >
-    <!-- <input type="file" name="file" accept=".csv" required /> -->
-    <!-- <button type="submit">Importar</button> -->
-    <div class="col-auto">
-      <!-- <label for="formFile" class="form-label">Transactions file</label> -->
+    <div>
       <input
         class="form-control"
         id="formFile"
@@ -20,7 +19,7 @@
         required
       />
     </div>
-    <div class="col-auto">
+    <div>
       <button type="submit" class="btn btn-primary mb-3">Importar</button>
     </div>
   </form>

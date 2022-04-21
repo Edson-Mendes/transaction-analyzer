@@ -18,4 +18,5 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `H2 database`
 - `Thymeleaf`
 - `Lombok`
+- `HTML5`
 - `Bootstrap`
