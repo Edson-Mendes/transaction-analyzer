@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Type {
+public enum AlertType {
 
   SUCCESS("alert-success"),
   ERROR("alert-danger");

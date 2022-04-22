@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Message {
 
-  private Type type;
+  private AlertType type;
   private String message;
 
 }

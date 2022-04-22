@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.emendes.transactionanalyzer.model.Message;
 import br.com.emendes.transactionanalyzer.model.TransactionsImport;
-import br.com.emendes.transactionanalyzer.model.Type;
+import br.com.emendes.transactionanalyzer.model.AlertType;
 import br.com.emendes.transactionanalyzer.service.TransactionsImportService;
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +28,7 @@ public class TransactionController {
 
   @GetMapping
   public ModelAndView home() {
-    ModelAndView modelAndView = new ModelAndView("home.html");
+    ModelAndView modelAndView = new ModelAndView("screen/home.html");
 
     // TODO: Converter para um dto para enviar para /home
     List<TransactionsImport> transactionsImport = transactionsImportService.findAll();
@@ -43,7 +43,7 @@ public class TransactionController {
     transactionsImportService.processImport(file);
 
     final Message message = Message.builder()
-        .type(Type.SUCCESS)
+        .type(AlertType.SUCCESS)
         .message("Arquivo processado com sucesso")
         .build();
     attributes.addFlashAttribute("message", message);
