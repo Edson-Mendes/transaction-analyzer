@@ -3,14 +3,40 @@
     <h2><b>Sign Up</b></h2>
   </div>
   <div th:if="${message != null}" th:insert="fragments/message"></div>
-  <form method="post" action="#">
+  <form method="post" action="#" th:action="@{/signup}" th:object="${userForm}">
     <div class="mb-3">
       <label for="inputName" class="form-label">Name</label>
-      <input type="text" class="form-control" id="inputName" />
+      <input
+        type="text"
+        class="form-control"
+        id="inputName"
+        required
+        th:field="*{name}"
+      />
+      <div
+        th:if="${#fields.hasErrors('name')}"
+        th:errors="*{name}"
+        class="text-danger"
+      >
+        Name Error
+      </div>
     </div>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="inputEmail" />
+      <input
+        type="email"
+        class="form-control"
+        id="inputEmail"
+        required
+        th:field="*{email}"
+      />
+      <div
+        th:if="${#fields.hasErrors('email')}"
+        th:errors="*{email}"
+        class="text-danger"
+      >
+        Email Error
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>
