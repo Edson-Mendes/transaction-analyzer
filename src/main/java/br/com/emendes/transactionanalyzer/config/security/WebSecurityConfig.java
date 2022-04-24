@@ -1,19 +1,23 @@
 package br.com.emendes.transactionanalyzer.config.security;
 
-import org.springframework.context.annotation.Bean;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Autowired
+  private DataSource dataSource;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -21,23 +25,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
+        .antMatchers("/h2-console/**").permitAll()
         .anyRequest().authenticated()
+        .and().csrf().disable()
+        .headers().frameOptions().disable()
         .and()
         .formLogin(form -> form
             .loginPage("/signin")
-            .permitAll());
+            .permitAll()
+            .defaultSuccessUrl("/transactions", true))
+        .logout(logout -> logout.logoutUrl("/logout"));
   }
 
-  @Bean
   @Override
-  public UserDetailsService userDetailsService() {
-    UserDetails user = User.withDefaultPasswordEncoder()
-        .username("user")
-        .password("123456")
-        .roles("USER")
-        .build();
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    BCryptPasswordEncoder passwordEnconder = new BCryptPasswordEncoder();
 
-    return new InMemoryUserDetailsManager(user);
+    auth.jdbcAuthentication()
+        .dataSource(dataSource)
+        .passwordEncoder(passwordEnconder);
   }
 
+  // Configurações de recursos estáticos(js, css, img, etc)
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring()
+        .antMatchers("/swagger-ui/index.html", "/**.html", "/api-docs/**", "/webjars/**", "/configuration/**",
+            "/swagger-resources/**", "/swagger-ui/**");
+  }
 }

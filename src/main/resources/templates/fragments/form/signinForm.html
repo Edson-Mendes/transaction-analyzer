@@ -3,45 +3,14 @@
     <h2><b>Sign In</b></h2>
   </div>
   <div th:if="${message != null}" th:insert="fragments/message"></div>
-  <form
-    method="post"
-    action="#"
-    th:action="@{/signin}"
-    th:object="${signinForm}"
-  >
+  <form method="post" action="#" th:action="@{/signin}">
     <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="inputEmail"
-        required
-        th:field="*{email}"
-      />
-      <div
-        th:if="${#fields.hasErrors('email')}"
-        th:errors="*{email}"
-        class="text-danger"
-      >
-        Email Error
-      </div>
+      <label for="username" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="username" required />
     </div>
     <div class="mb-3">
-      <label for="inputPassword" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="inputPassword"
-        required
-        th:field="*{password}"
-      />
-      <div
-        th:if="${#fields.hasErrors('password')}"
-        th:errors="*{password}"
-        class="text-danger"
-      >
-        Password Error
-      </div>
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" required />
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>

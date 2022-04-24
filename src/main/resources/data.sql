@@ -1,7 +1,15 @@
 -- Inserindo usuário admin
-INSERT INTO user(id, name, email, password) VALUES(1, 'Admin', 'admin@email.com.br', '123999')
+INSERT INTO users(name, username, password, enabled) VALUES('Admin', 'admin@email.com', '$2a$10$SlPvWc6mCqUvEF0MgzZD5el/kembXDY9A138H.tDal/s4rzmHP4FO', true)
+
+-- Inserindo Authorities
+INSERT INTO authorities(username, authority) VALUES('admin@email.com', 'USER')
+-- INSERT INTO role(name) VALUES('ROLE_ADMIN')
+
+-- INSERT INTO user_roles(user_id, roles_id) VALUES(1, 1)
+-- INSERT INTO user_roles(user_id, roles_id) VALUES(1, 2)
+
 -- -- Inserindo os Bancos no banco de dados.
--- INSERT INTO bank(id, name) VALUES (654, 'A.J. RENNER S.A.')
+INSERT INTO bank(id, name) VALUES (654, 'A.J. RENNER S.A.')
 -- INSERT INTO bank(id, name) VALUES (246, 'ABC-BRASIL S.A.')
 -- INSERT INTO bank(id, name) VALUES (213, 'ARBI S.A.')
 -- INSERT INTO bank(id, name) VALUES (19, 'AZTECA DO BRASIL S.A.')

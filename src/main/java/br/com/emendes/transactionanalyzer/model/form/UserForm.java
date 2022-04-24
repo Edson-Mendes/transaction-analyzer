@@ -26,6 +26,7 @@ public class UserForm {
     return User.builder()
         .name(this.name)
         .email(this.email)
+        .enabled(true)
         .build();
   }
 }
