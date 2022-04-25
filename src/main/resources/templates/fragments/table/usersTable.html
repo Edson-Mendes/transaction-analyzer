@@ -1,10 +1,7 @@
 <div class="d-flex justify-content-center">
-  <div th:if="${users.isEmpty}">Nothing to see here!</div>
+  <div th:if="${users.isEmpty}" class="pt-2 pb-4">Nothing to see here!</div>
 </div>
 <div th:unless="${users.isEmpty}">
-  <div class="d-flex justify-content-center">
-    <h2 class="pt-2 pb-4"><b>USUÀRIOS CADASTRADOS</b></h2>
-  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -19,10 +16,12 @@
           <td><span th:text="${user.name}"></span></td>
           <td><span th:text="${user.email}"></span></td>
           <td>
-            <button class="btn btn-info">Editar</button> 
-            <form action="#" th:method="delete" th:action="@{/users/{id}(id = ${user.id})}">
-              <button type="submit" class="btn btn-danger">Remover</button>
-            </form>
+            <div class="d-flex flex-row">
+              <button class="btn btn-info">Editar</button> 
+              <form class="ms-1" action="#" th:method="delete" th:action="@{/users/{id}(id = ${user.id})}">
+                <button type="submit" class="btn btn-danger">Remover</button>
+              </form>
+            </div>
           </td>
         </tr>
       </tbody>

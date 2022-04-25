@@ -22,6 +22,7 @@ public class UserService {
   public void create(UserForm userForm) {
     if (userRepository.existsByEmail(userForm.getEmail())) {
       // TODO: Lançar uma exception avisando que o email está em uso.
+      return;
     }
 
     User user = userForm.toUser();

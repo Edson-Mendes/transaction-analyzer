@@ -3,6 +3,15 @@
   <head th:insert="head/head.html :: head('Users')"> </head>
   <body class="d-flex justify-content-center">
     <div class="px-4 py-3 d-flex flex-column" style="width: 800px">
+      <div th:insert="fragments/title :: title('REGISTERED USERS')"></div>
+      <div class="d-flex justify-content-start mt-2">
+        <a
+          href="#"
+          th:href="@{/users/register}"
+          class="btn btn-primary"
+          th:text="New"
+        ></a>
+      </div>
       <div th:insert="fragments/table/usersTable"></div>
       <!-- Botão para realizar logout -->
       <!-- TODO: Alterar aparência do logout -->
