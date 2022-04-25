@@ -1,8 +1,10 @@
 -- Inserindo usuário admin
-INSERT INTO users(name, username, password, enabled) VALUES('Admin', 'admin@email.com', '$2a$10$SlPvWc6mCqUvEF0MgzZD5el/kembXDY9A138H.tDal/s4rzmHP4FO', true)
+INSERT INTO users(name, username, password, enabled) VALUES('Admin', 'admin@email.com.br', '$2a$10$I0hNev65Kkv4VfETs0dMmuf3nbZDooKYkPcGnPsLjvkhMYfBKe7Oi', true)
+INSERT INTO users(name, username, password, enabled) VALUES('user', 'user@email.com', '$2a$10$I0hNev65Kkv4VfETs0dMmuf3nbZDooKYkPcGnPsLjvkhMYfBKe7Oi', true)
 
 -- Inserindo Authorities
-INSERT INTO authorities(username, authority) VALUES('admin@email.com', 'USER')
+INSERT INTO authorities(username, authority) VALUES('admin@email.com.br', 'ADMIN')
+INSERT INTO authorities(username, authority) VALUES('user@email.com', 'USER')
 -- INSERT INTO role(name) VALUES('ROLE_ADMIN')
 
 -- INSERT INTO user_roles(user_id, roles_id) VALUES(1, 1)

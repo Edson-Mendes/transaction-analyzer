@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center">
+  <div th:if="${users.isEmpty}">Nothing to see here!</div>
+</div>
+<div th:unless="${users.isEmpty}">
+  <div class="d-flex justify-content-center">
+    <h2 class="pt-2 pb-4"><b>USUÀRIOS CADASTRADOS</b></h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">OPTIONS</th>
+      </tr>
+      <tbody>
+        <tr th:each="user : ${users}">
+          <td><span th:text="${user.id}"></span></td>
+          <td><span th:text="${user.name}"></span></td>
+          <td><span th:text="${user.email}"></span></td>
+          <td><span th:text="EDITAR"></span><span th:text="EXCLUIR"></span></td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+</div>

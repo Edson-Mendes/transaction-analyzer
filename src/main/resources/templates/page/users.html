@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head th:insert="head/head.html :: head('Transactions')"> </head>
+  <head th:insert="head/head.html :: head('Users')"> </head>
   <body class="d-flex justify-content-center">
     <div class="px-4 py-3 d-flex flex-column" style="width: 800px">
-      <div th:insert="fragments/form/transactionForm"></div>
-      <div th:insert="fragments/importationTable"></div>
+      <div th:insert="fragments/table/usersTable"></div>
+      <!-- Botão para realizar logout -->
+      <!-- TODO: Alterar aparência do logout -->
+      <!-- TODO: Extrair logout para uma arquivo separado -->
       <div class="d-flex justify-content-center mt-3">
         <form method="post" th:action="@{/logout}">
           <button type="submit" class="btn btn-primary mb-3">logout</button>

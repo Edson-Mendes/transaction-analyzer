@@ -2,6 +2,7 @@ package br.com.emendes.transactionanalyzer.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,16 @@ public class SignupController {
 
   @GetMapping
   public String signupForm(UserForm userForm) {
-    return "screen/signup";
+    System.out.println("===============================================");
+    System.out.println(new BCryptPasswordEncoder().encode("123999"));
+    System.out.println("===============================================");
+    return "page/signup";
   }
 
   @PostMapping
   public String submitForm(@Valid UserForm userForm, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return "screen/signup";
+      return "page/signup";
     }
 
     userService.create(userForm);

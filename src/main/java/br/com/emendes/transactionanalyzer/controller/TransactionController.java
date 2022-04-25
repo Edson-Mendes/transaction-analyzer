@@ -28,7 +28,7 @@ public class TransactionController {
 
   @GetMapping
   public ModelAndView home() {
-    ModelAndView modelAndView = new ModelAndView("screen/transactions.html");
+    ModelAndView modelAndView = new ModelAndView("page/transactions.html");
 
     // TODO: Converter para um dto para enviar para /home
     List<TransactionsImport> transactionsImport = transactionsImportService.findAll();
