@@ -18,7 +18,12 @@
           <td><span th:text="${user.id}"></span></td>
           <td><span th:text="${user.name}"></span></td>
           <td><span th:text="${user.email}"></span></td>
-          <td><span th:text="EDITAR"></span><span th:text="EXCLUIR"></span></td>
+          <td>
+            <button class="btn btn-info">Editar</button> 
+            <form action="#" th:method="delete" th:action="@{/users/{id}(id = ${user.id})}">
+              <button type="submit" class="btn btn-danger">Remover</button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </thead>

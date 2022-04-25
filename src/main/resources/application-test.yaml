@@ -27,11 +27,18 @@ spring:
     console:
       enabled: true
       path: /h2-console
-  
+
+# Tamanho de arquivo suportado  
   servlet:
     multipart:
       max-file-size: 512KB
       max-request-size: 512KB
+
+# Ativando hidden methods
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
 # log
 logging:

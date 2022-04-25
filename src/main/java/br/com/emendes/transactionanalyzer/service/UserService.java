@@ -1,9 +1,9 @@
 package br.com.emendes.transactionanalyzer.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.emendes.transactionanalyzer.model.Authority;
 import br.com.emendes.transactionanalyzer.model.User;
@@ -34,16 +34,17 @@ public class UserService {
   public List<UserDto> readAll() {
     // TODO: Paginar a busca por usuários.
 
-    // TODO: Aprender como fazer esse tipo filtro via jpa query.
-    Authority authority = new Authority("USER");
-    List<User> users = userRepository.findAll()
-        .stream()
-        .filter(u -> u.getAuthorities().contains(authority))
-        .collect(Collectors.toList());
+    Authority authority = new Authority("ADMIN");
+    List<User> users = userRepository.findByAuthority(authority);
 
     List<UserDto> usersDto = UserDto.fromUserList(users);
 
     return usersDto;
+  }
+
+  @Transactional
+  public void deleteById(Long id, String email) {
+    userRepository.deleteByIdWhereEmailNotEquals(id, email);
   }
 
 }
