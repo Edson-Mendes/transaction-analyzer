@@ -53,6 +53,17 @@ public class UserService {
     userRepository.deleteByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority);
   }
 
+  public void disableUser(Long id, String email) {
+    Authority authority = new Authority("ADMIN");
+    User user = userRepository.findByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority)
+        .orElseThrow(() -> {
+          throw new UserNotFoundException("User not found");
+        });
+
+    user.setEnabled(false);
+    userRepository.save(user);
+  }
+
   public void update(Long id, @Valid UpdateUserForm updateForm) {
     User user = userRepository.findById(id).orElseThrow(() -> {
       throw new UserNotFoundException("User not found");
