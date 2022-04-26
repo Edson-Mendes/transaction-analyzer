@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.emendes.transactionanalyzer.model.Transaction;
 import br.com.emendes.transactionanalyzer.model.TransactionsImport;
+import br.com.emendes.transactionanalyzer.model.User;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
 import br.com.emendes.transactionanalyzer.util.ReadFile;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class TransactionsImportService {
 
   private final TransactionsImportRepository transactionsImportRepository;
+  private final UserService userService;
 
   private void save(TransactionsImport transactionsImport) {
     transactionsImportRepository.save(transactionsImport);
@@ -33,7 +35,7 @@ public class TransactionsImportService {
     return transactionsImportRepository.findAll(sort);
   }
 
-  public void processImport(MultipartFile file) {
+  public void processImport(MultipartFile file, String email) {
     List<String> transactionsLines = ReadFile.readMultipartFile(file);
     List<Transaction> transactions = TransactionUtil.generateTransactionsList(transactionsLines);
 
@@ -46,11 +48,13 @@ public class TransactionsImportService {
     }
 
     List<Transaction> filteredTransactions = TransactionUtil.filterTransactionByDate(transactions, transactionsDate);
+    User user = userService.findByEmail(email);
 
     TransactionsImport transactionsImport = TransactionsImport.builder()
         .transactionsDate(transactionsDate)
         .importDateTime(LocalDateTime.now())
         .transactions(filteredTransactions)
+        .user(user)
         .build();
 
     save(transactionsImport);

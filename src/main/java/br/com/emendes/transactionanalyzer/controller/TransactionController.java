@@ -1,5 +1,6 @@
 package br.com.emendes.transactionanalyzer.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -39,8 +40,9 @@ public class TransactionController {
 
   @PostMapping
   @Transactional
-  public String submitForm(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
-    transactionsImportService.processImport(file);
+  public String submitForm(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
+      Principal principal) {
+    transactionsImportService.processImport(file, principal.getName());
 
     final Message message = Message.builder()
         .type(AlertType.SUCCESS)
