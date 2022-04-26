@@ -19,9 +19,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   Optional<User> findByEmail(String email);
 
+  // Apenas usuários com authority 'ADMIN' não podem ser deletados.
   @Modifying
-  @Query("DELETE FROM User u WHERE u.id = :id AND u.email != :email")
-  void deleteByIdWhereEmailNotEquals(@Param("id") Long id, @Param("email") String email);
+  @Query("DELETE FROM User u WHERE u.id = :id AND u.email != :email AND :authority NOT MEMBER OF u.authorities")
+  void deleteByIdWhereEmailNotEqualsAndNotAdmin(@Param("id") Long id, @Param("email") String email,
+      @Param("authority") Authority authority);
 
   @Query("SELECT u FROM User u WHERE :authority NOT MEMBER OF u.authorities")
   List<User> findByAuthority(@Param("authority") Authority authority);

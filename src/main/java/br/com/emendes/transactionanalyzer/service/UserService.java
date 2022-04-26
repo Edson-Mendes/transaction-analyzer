@@ -2,15 +2,20 @@ package br.com.emendes.transactionanalyzer.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.emendes.transactionanalyzer.model.Authority;
 import br.com.emendes.transactionanalyzer.model.User;
 import br.com.emendes.transactionanalyzer.model.dto.UserDto;
+import br.com.emendes.transactionanalyzer.model.form.UpdateUserForm;
 import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.repository.UserRepository;
 import br.com.emendes.transactionanalyzer.util.PasswordGenerator;
+import br.com.emendes.transactionanalyzer.validation.exception.EmailAlreadyRegisteredException;
+import br.com.emendes.transactionanalyzer.validation.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,8 +26,7 @@ public class UserService {
 
   public void create(UserForm userForm) {
     if (userRepository.existsByEmail(userForm.getEmail())) {
-      // TODO: Lançar uma exception avisando que o email está em uso.
-      return;
+      throw new EmailAlreadyRegisteredException("This email address is already registered!");
     }
 
     User user = userForm.toUser();
@@ -45,7 +49,23 @@ public class UserService {
 
   @Transactional
   public void deleteById(Long id, String email) {
-    userRepository.deleteByIdWhereEmailNotEquals(id, email);
+    Authority authority = new Authority("ADMIN");
+    userRepository.deleteByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority);
+  }
+
+  public void update(Long id, @Valid UpdateUserForm updateForm) {
+    User user = userRepository.findById(id).orElseThrow(() -> {
+      throw new UserNotFoundException("User not found");
+    });
+
+    user.setName(updateForm.getName());
+    userRepository.save(user);
+  }
+
+  public User findById(Long id) {
+    return userRepository.findById(id).orElseThrow(() -> {
+      throw new UserNotFoundException("User not found");
+    });
   }
 
 }

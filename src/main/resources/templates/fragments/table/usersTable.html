@@ -17,7 +17,12 @@
           <td><span th:text="${user.email}"></span></td>
           <td>
             <div class="d-flex flex-row">
-              <button class="btn btn-info">Editar</button> 
+              <a
+                href="#"
+                th:href="@{/users/update/{id}(id = ${user.id})}"
+                class="btn btn-info"
+                th:text="Editar"
+              ></a>
               <form class="ms-1" action="#" th:method="delete" th:action="@{/users/{id}(id = ${user.id})}">
                 <button type="submit" class="btn btn-danger">Remover</button>
               </form>

@@ -6,14 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.service.UserService;
 import lombok.RequiredArgsConstructor;
 
+// TODO: No momento, não é necessário na aplicação.
 @Controller
-@RequestMapping("/signup")
+// @RequestMapping("/signup")
 @RequiredArgsConstructor
 public class SignupController {
 

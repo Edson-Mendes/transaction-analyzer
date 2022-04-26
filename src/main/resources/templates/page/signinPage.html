@@ -3,7 +3,12 @@
   <head th:insert="head/head.html :: head('Sign In')"></head>
   <body class="d-flex justify-content-center">
     <div class="px-4 py-3 d-flex flex-column" style="width: 800px">
+      <div th:insert="fragments/title :: title('Sign In')"></div>
       <div th:insert="fragments/form/signinForm"></div>
     </div>
+    <!-- No momento a aplicação não precisa de uma tela de signup -->
+    <!-- <div class="d-flex justify-content-center mt-3">
+      <p>Don't have an Account? <a href="/signup">Sign Up</a></p>
+    </div> -->
   </body>
 </html>

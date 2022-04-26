@@ -10,7 +10,7 @@ public class SigninController {
 
   @GetMapping
   public String signupForm() {
-    return "page/signin";
+    return "page/signinPage";
   }
 
 }
