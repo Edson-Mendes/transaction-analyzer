@@ -22,13 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
-        // .antMatchers(HttpMethod.GET, "/signup").permitAll()
-        // .antMatchers(HttpMethod.POST, "/signup").permitAll()
-        // TODO: Remover o permitAll dos endpoint /users
-        // .antMatchers(HttpMethod.GET, "/users").permitAll()
-        // .antMatchers(HttpMethod.POST, "/users").permitAll()
-        // .antMatchers(HttpMethod.GET, "/users/**").permitAll()
-        // .antMatchers(HttpMethod.POST, "/users/**").permitAll()
         .antMatchers("/h2-console/**").permitAll()
         .anyRequest().authenticated()
         .and().csrf().disable()

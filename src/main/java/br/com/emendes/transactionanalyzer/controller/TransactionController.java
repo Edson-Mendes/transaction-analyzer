@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.emendes.transactionanalyzer.model.Message;
-import br.com.emendes.transactionanalyzer.model.TransactionsImport;
 import br.com.emendes.transactionanalyzer.model.AlertType;
+import br.com.emendes.transactionanalyzer.model.Message;
+import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.service.TransactionsImportService;
 import lombok.RequiredArgsConstructor;
 
@@ -30,9 +30,8 @@ public class TransactionController {
   @GetMapping
   public ModelAndView home() {
     ModelAndView modelAndView = new ModelAndView("page/transactionsPage.html");
-
-    // TODO: Converter para um dto para enviar para /home
-    List<TransactionsImport> transactionsImport = transactionsImportService.findAll();
+    // TODO: Paginar busca de transações
+    List<TransactionsImportDto> transactionsImport = transactionsImportService.findAll();
     modelAndView.addObject("transactionsImport", transactionsImport);
 
     return modelAndView;
