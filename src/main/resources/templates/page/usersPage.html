@@ -2,7 +2,8 @@
 <html lang="pt-BR">
   <head th:insert="head/head.html :: head('Users')"> </head>
   <body class="d-flex justify-content-center">
-    <div class="px-4 py-3 d-flex flex-column" style="width: 800px">
+    <div class="px-4 d-flex flex-column" style="width: 800px">
+      <nav th:insert="fragments/menuBar"></nav>
       <div th:insert="fragments/title :: title('REGISTERED USERS')"></div>
       <div class="d-flex justify-content-start mt-2">
         <a
@@ -13,14 +14,6 @@
         ></a>
       </div>
       <div th:insert="fragments/table/usersTable"></div>
-      <!-- Botão para realizar logout -->
-      <!-- TODO: Alterar aparência do logout -->
-      <!-- TODO: Extrair logout para uma arquivo separado -->
-      <div class="d-flex justify-content-center mt-3">
-        <form method="post" th:action="@{/logout}">
-          <button type="submit" class="btn btn-primary mb-3">logout</button>
-        </form>
-      </div>
     </div>
   </body>
 </html>
