@@ -1,0 +1,35 @@
+<div class="border p-3 rounded-1">
+  <form action="#" th:object="${importDetails}">
+    <fieldset disabled="disabled">
+      <div class="mb-3">
+        <label for="disabledImportedAt" class="form-label">Imported at</label>
+        <input
+          type="text"
+          id="disabledImportedAt"
+          class="form-control"
+          th:field="*{importDateTime}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="disabledImportedBy" class="form-label">Imported by</label>
+        <input
+          type="text"
+          id="disabledImportedBy"
+          class="form-control"
+          th:field="*{username}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="disabledTransactionsDate" class="form-label"
+          >Transactions date</label
+        >
+        <input
+          type="text"
+          id="disabledTransactionsDate"
+          class="form-control"
+          th:field="*{transactionsDate}"
+        />
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -13,11 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.emendes.transactionanalyzer.model.Transaction;
 import br.com.emendes.transactionanalyzer.model.TransactionsImport;
 import br.com.emendes.transactionanalyzer.model.User;
+import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
 import br.com.emendes.transactionanalyzer.util.ReadFile;
 import br.com.emendes.transactionanalyzer.util.TransactionUtil;
+import br.com.emendes.transactionanalyzer.validation.exception.ImportNotFoundException;
 import br.com.emendes.transactionanalyzer.validation.exception.TransactionsDateAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +42,13 @@ public class TransactionsImportService {
         .map(t -> new TransactionsImportDto(t))
         .collect(Collectors.toList());
     return transactionsImportDto;
+  }
+
+  public ImportDetailsDto findById(Long id) {
+    TransactionsImport transactionsImport = transactionsImportRepository.findById(id).orElseThrow(() -> {
+      throw new ImportNotFoundException("Import not found");
+    });
+    return new ImportDetailsDto(transactionsImport);
   }
 
   public void processImport(MultipartFile file, String email) {
@@ -66,4 +75,5 @@ public class TransactionsImportService {
 
     save(transactionsImport);
   }
+
 }

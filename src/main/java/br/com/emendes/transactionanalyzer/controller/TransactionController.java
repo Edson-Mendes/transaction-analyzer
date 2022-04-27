@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +17,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.emendes.transactionanalyzer.model.AlertType;
 import br.com.emendes.transactionanalyzer.model.Message;
+import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.service.TransactionsImportService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+// TODO: Mudar nome para mapeamento para /imports
 @RequestMapping("/transactions")
 public class TransactionController {
 
@@ -33,6 +36,17 @@ public class TransactionController {
     // TODO: Paginar busca de transações
     List<TransactionsImportDto> transactionsImport = transactionsImportService.findAll();
     modelAndView.addObject("transactionsImport", transactionsImport);
+
+    return modelAndView;
+  }
+
+  @GetMapping("/{id}")
+  public ModelAndView details(@PathVariable Long id) {
+    ModelAndView modelAndView = new ModelAndView("page/importDetailsPage");
+
+    ImportDetailsDto importDetailsDto = transactionsImportService.findById(id);
+
+    modelAndView.addObject("importDetails", importDetailsDto);
 
     return modelAndView;
   }

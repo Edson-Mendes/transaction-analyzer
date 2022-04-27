@@ -9,12 +9,14 @@
         <th scope="col">Transactions Date</th>
         <th scope="col">Import Date</th>
         <th scope="col">User</th>
+        <th scope="col">Opções</th>
       </tr>
       <tbody>
         <tr th:each="import : ${transactionsImport}">
           <td><span th:text="${#temporals.format(import.transactionsDate, 'dd/MM/yyyy')}"></span></td>
           <td><span th:text="${#temporals.format(import.importDateTime, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
           <td><span th:text="${import.username}"></span></td>
+          <td><a th:href="@{/transactions/{id}(id = ${import.id})}" class="btn btn-info" th:text="Details"></a></td>
         </tr>
       </tbody>
     </thead>
