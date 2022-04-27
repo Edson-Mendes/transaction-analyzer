@@ -2,10 +2,15 @@
 <html lang="pt-BR">
   <head th:insert="head/head.html :: head('IMPORT DETAILS')"></head>
   <body class="d-flex justify-content-center">
-    <div class="px-4 d-flex flex-column" style="width: 800px">
+    <div class="px-4 d-flex flex-column" style="width: 1000px">
       <nav th:insert="fragments/menuBar"></nav>
       <div th:insert="fragments/title :: title('IMPORT DETAILS')"></div>
       <div th:insert="fragments/importDetails"></div>
+      <div
+        class="mt-3"
+        th:insert="fragments/subtitle :: subtitle('TRANSACTIONS IMPORTED')"
+      ></div>
+      <div th:insert="fragments/table/transactionsTable"></div>
     </div>
   </body>
 </html>

@@ -1,0 +1,39 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th colspan="3" style="text-align: center">ORIGIN</th>
+      <th colspan="3" style="text-align: center">DESTINATION</th>
+      <th
+        scope="col"
+        rowspan="2"
+        class="align-middle"
+        style="text-align: center"
+      >
+        VALUE
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">BANK</th>
+      <th scope="col">BRANCH</th>
+      <th scope="col">ACCOUNT</th>
+      <th scope="col">BANK</th>
+      <th scope="col">BRANCH</th>
+      <th scope="col">ACCOUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="transaction : ${importDetails.transactions}">
+      <td><span th:text="${transaction.originBank}"></span></td>
+      <td><span th:text="${transaction.originBranch}"></span></td>
+      <td><span th:text="${transaction.originAccount}"></span></td>
+      <td><span th:text="${transaction.destinationBank}"></span></td>
+      <td><span th:text="${transaction.destinationBranch}"></span></td>
+      <td><span th:text="${transaction.destinationAccount}"></span></td>
+      <td>
+        <span
+          th:text="${'R$ '+#numbers.formatDecimal(transaction.value,3,'POINT',2,'COMMA')}"
+        ></span>
+      </td>
+    </tr>
+  </tbody>
+</table>

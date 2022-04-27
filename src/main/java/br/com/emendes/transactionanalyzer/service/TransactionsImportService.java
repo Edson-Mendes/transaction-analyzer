@@ -48,6 +48,7 @@ public class TransactionsImportService {
     TransactionsImport transactionsImport = transactionsImportRepository.findById(id).orElseThrow(() -> {
       throw new ImportNotFoundException("Import not found");
     });
+
     return new ImportDetailsDto(transactionsImport);
   }
 

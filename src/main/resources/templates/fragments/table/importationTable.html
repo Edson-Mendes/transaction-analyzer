@@ -1,5 +1,5 @@
 <div th:unless="${transactionsImport.isEmpty}">
-  <div class="border-top" style="width: 750px;"></div>
+  <div class="border-top" style="width: 950px"></div>
   <div class="d-flex justify-content-center">
     <h5 class="pt-3"><b>PERFORMED IMPORTS</b></h5>
   </div>
@@ -11,14 +11,28 @@
         <th scope="col">User</th>
         <th scope="col">Opções</th>
       </tr>
-      <tbody>
-        <tr th:each="import : ${transactionsImport}">
-          <td><span th:text="${#temporals.format(import.transactionsDate, 'dd/MM/yyyy')}"></span></td>
-          <td><span th:text="${#temporals.format(import.importDateTime, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
-          <td><span th:text="${import.username}"></span></td>
-          <td><a th:href="@{/transactions/{id}(id = ${import.id})}" class="btn btn-info" th:text="Details"></a></td>
-        </tr>
-      </tbody>
     </thead>
+    <tbody>
+      <tr th:each="import : ${transactionsImport}">
+        <td>
+          <span
+            th:text="${#temporals.format(import.transactionsDate, 'dd/MM/yyyy')}"
+          ></span>
+        </td>
+        <td>
+          <span
+            th:text="${#temporals.format(import.importDateTime, 'dd/MM/yyyy HH:mm:ss')}"
+          ></span>
+        </td>
+        <td><span th:text="${import.username}"></span></td>
+        <td>
+          <a
+            th:href="@{/transactions/{id}(id = ${import.id})}"
+            class="btn btn-info"
+            th:text="Details"
+          ></a>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
