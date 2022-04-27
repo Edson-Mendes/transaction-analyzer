@@ -57,7 +57,7 @@ public class UserService {
     Authority authority = new Authority("ADMIN");
     User user = userRepository.findByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority)
         .orElseThrow(() -> {
-          throw new UserNotFoundException("User not found");
+          throw new UserNotFoundException("User not found or can not be deleted");
         });
 
     user.setEnabled(false);

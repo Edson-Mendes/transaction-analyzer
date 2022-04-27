@@ -9,6 +9,7 @@
         <th scope="col">NAME</th>
         <th scope="col">EMAIL</th>
         <th scope="col">OPTIONS</th>
+        <th scope="col">ENABLED</th>
       </tr>
       <tbody>
         <tr th:each="user : ${users}">
@@ -18,16 +19,17 @@
           <td>
             <div class="d-flex flex-row">
               <a
-                href="#"
-                th:href="@{/users/update/{id}(id = ${user.id})}"
-                class="btn btn-info"
-                th:text="Edit"
+              href="#"
+              th:href="@{/users/update/{id}(id = ${user.id})}"
+              class="btn btn-info"
+              th:text="Edit"
               ></a>
               <form class="ms-1" action="#" th:method="delete" th:action="@{/users/{id}(id = ${user.id})}">
                 <button type="submit" class="btn btn-danger">Delete</button>
               </form>
             </div>
           </td>
+          <td><span th:text="${user.enabled}"></span></td>
         </tr>
       </tbody>
     </thead>

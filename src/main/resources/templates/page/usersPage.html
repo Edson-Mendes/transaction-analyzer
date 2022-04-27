@@ -5,6 +5,7 @@
     <div class="px-4 d-flex flex-column" style="width: 1000px">
       <nav th:insert="fragments/menuBar"></nav>
       <div th:insert="fragments/title :: title('REGISTERED USERS')"></div>
+      <div th:if="${message != null}" th:insert="fragments/message"></div>
       <div class="d-flex justify-content-start mt-2">
         <a
           href="#"
