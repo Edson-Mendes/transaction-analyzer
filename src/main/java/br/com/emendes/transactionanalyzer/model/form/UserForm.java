@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import br.com.emendes.transactionanalyzer.model.Authority;
 import br.com.emendes.transactionanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +24,13 @@ public class UserForm {
   private String email;
 
   public User toUser() {
-    return User.builder()
+    User user = User.builder()
         .name(this.name)
         .email(this.email)
         .enabled(true)
         .build();
+    Authority userAuthority = new Authority("USER");
+    user.addAuthority(userAuthority);
+    return user;
   }
 }

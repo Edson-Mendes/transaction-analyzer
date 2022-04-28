@@ -13,6 +13,7 @@ import br.com.emendes.transactionanalyzer.model.dto.UserDto;
 import br.com.emendes.transactionanalyzer.model.form.UpdateUserForm;
 import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.repository.UserRepository;
+import br.com.emendes.transactionanalyzer.util.Encoder;
 import br.com.emendes.transactionanalyzer.util.PasswordGenerator;
 import br.com.emendes.transactionanalyzer.validation.exception.EmailAlreadyRegisteredException;
 import br.com.emendes.transactionanalyzer.validation.exception.UserNotFoundException;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
   private final UserRepository userRepository;
+  private final EmailService emailService;
 
   public void create(UserForm userForm) {
     if (userRepository.existsByEmail(userForm.getEmail())) {
@@ -30,9 +32,11 @@ public class UserService {
     }
 
     User user = userForm.toUser();
-    user.setPassword(PasswordGenerator.generate());
-    Authority userAuthority = new Authority("USER");
-    user.addAuthority(userAuthority);
+    String password = PasswordGenerator.generate();
+
+    emailService.send(user, password);
+    user.setPassword(Encoder.encrypt(password));
+
     userRepository.save(user);
   }
 

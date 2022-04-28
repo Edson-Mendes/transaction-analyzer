@@ -2,8 +2,6 @@ package br.com.emendes.transactionanalyzer.util;
 
 import java.util.Random;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 public abstract class PasswordGenerator {
 
   public static String generate() {
@@ -13,12 +11,7 @@ public abstract class PasswordGenerator {
     System.out.println("=============================================");
     System.out.println("password: " + password);
     System.out.println("=============================================");
-    return encrypt(password);
-  }
-
-  private static String encrypt(String password) {
-    String passwordEncrypted = new BCryptPasswordEncoder().encode(password);
-    return passwordEncrypted;
+    return password;
   }
 
 }
