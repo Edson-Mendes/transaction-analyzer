@@ -31,7 +31,7 @@ public class TransactionController {
   private final TransactionsImportService transactionsImportService;
 
   @GetMapping
-  public ModelAndView home() {
+  public ModelAndView transactionsPage() {
     ModelAndView modelAndView = new ModelAndView("page/transactionsPage.html");
     // TODO: Paginar busca de transações
     List<TransactionsImportDto> transactionsImport = transactionsImportService.findAll();

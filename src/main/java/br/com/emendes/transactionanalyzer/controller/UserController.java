@@ -61,38 +61,41 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String registerUser(@Valid UserForm userForm, BindingResult bindingResult) {
+  public RedirectView registerUser(@Valid UserForm userForm, BindingResult bindingResult,
+      RedirectAttributes attributes) {
     if (bindingResult.hasErrors()) {
-      return "page/registerUserPage";
+      attributes.addFlashAttribute("message", new Message(AlertType.ERROR, "Invalid name: " + userForm.getName()));
+      return new RedirectView("/users/register");
     }
-
     userService.create(userForm);
-    return "redirect:/users";
+
+    attributes.addFlashAttribute("message", new Message(AlertType.SUCCESS, "User registered successfully"));
+    return new RedirectView("/users");
   }
 
   @PutMapping("/update/{id}")
-  public RedirectView updateUser(@PathVariable Long id, @Valid UpdateUserForm updateForm, BindingResult bindingResult,
+  public RedirectView updateUser(@PathVariable Long id,
+      @Valid UpdateUserForm updateForm,
+      BindingResult bindingResult,
       RedirectAttributes attributes) {
     if (bindingResult.hasErrors()) {
-      final Message message = Message.builder()
-          .type(AlertType.ERROR)
-          .message("Invalid name")
-          .build();
-      attributes.addFlashAttribute("message", message);
+      attributes.addFlashAttribute("message", new Message(AlertType.ERROR, "Invalid name: " + updateForm.getName()));
       return new RedirectView("/users/update/" + id);
     }
 
     userService.update(id, updateForm);
-
+    attributes.addFlashAttribute("message", new Message(AlertType.SUCCESS, "User updated successfully"));
     return new RedirectView("/users");
   }
 
   @DeleteMapping("/{id}")
-  public String deleteUser(@PathVariable Long id, Principal principal) {
+  public RedirectView deleteUser(@PathVariable Long id,
+      Principal principal,
+      RedirectAttributes attributes) {
 
-    // userService.deleteById(id, principal.getName());
     userService.disableUser(id, principal.getName());
-    return "redirect:/users";
+    attributes.addFlashAttribute("message", new Message(AlertType.SUCCESS, "User disabled successfully"));
+    return new RedirectView("/users");
   }
 
 }

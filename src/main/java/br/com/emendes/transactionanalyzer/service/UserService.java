@@ -35,9 +35,10 @@ public class UserService {
     String password = PasswordGenerator.generate();
 
     emailService.send(user, password);
-    user.setPassword(Encoder.encrypt(password));
 
+    user.setPassword(Encoder.encrypt(password));
     userRepository.save(user);
+
   }
 
   public List<UserDto> readAll() {
