@@ -34,7 +34,7 @@ public class UserService {
     User user = userForm.toUser();
     String password = PasswordGenerator.generate();
 
-    emailService.send(user, password);
+    emailService.sendEmail(user, password);
 
     user.setPassword(Encoder.encrypt(password));
     userRepository.save(user);

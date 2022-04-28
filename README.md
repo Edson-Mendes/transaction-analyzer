@@ -10,6 +10,17 @@ Transaction Analyzer é uma aplicação para análise de transações financeira
 
 O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 
+## :hammer: Funcionalidades
+- `Autenticação de usuário`
+  - `Login`: Login de usuário informando email e senha.
+  - `Cadastrar usuário`: Usuários autenticados podem cadastrar outros usuários, cadastrando nome e email, a senha é gerada automaticamente e enviada para o email cadastrado.
+- `Importação de arquivo de transações`: Arquivos do tipo .csv contendo transações financeiras podem ser enviados, o arquivo enviado passa por uma série de validações, sendo salvo apenas as transações com informações válidas.
+- `Histórico de importações`: Um histórico de importações realizadas é mostrado na tela principal da aplicação.
+- `Detalhes de cada importação`: Apartir do histórico de importações pode-se acessar os detalhes de cada arquivo importado, como: data de importação, quem importou, data das transações, e uma lista de todas as transações de tal arquivo.
+- `Editar usuário`: Usuários autenticados podem editar informações de outros usuários.
+- `Deletar usuário`: Usuários autenticados podem desabilitar o acesso de outros usuário, usuário NÃO podem se auto desabilitar.
+- `Lista de usuários`: Uma tela para mostrar todos os usuários cadastrados e suas informações, assim como os botões de *EDITAR* e *DELETAR*.
+
 ## :toolbox: Tecnologias
 - `VSCode`
 - `Java 17`
@@ -20,3 +31,4 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `Lombok`
 - `HTML5`
 - `Bootstrap`
+- `MySQL`
