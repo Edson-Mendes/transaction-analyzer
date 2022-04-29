@@ -1,0 +1,25 @@
+<form method="get" action="#" th:action="@{/analysis/oi}">
+  <legend>Select the month and year for analysis</legend>
+  <div class="mb-3">
+    <label for="monthField" class="form-label">Month</label>
+    <select id="monthField" class="form-select" name="monthField">
+      <option>January</option>
+      <option>February</option>
+      <option>March</option>
+      <option>April</option>
+      <option>May</option>
+      <option>june</option>
+      <option>July</option>
+      <option>August</option>
+      <option>September</option>
+      <option>October</option>
+      <option>November</option>
+      <option>December</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="yearField" class="form-label">Year</label>
+    <input type="number" class="form-control" name="yearField" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Analyze</button>
+</form>
