@@ -1,25 +1,41 @@
-<form method="get" action="#" th:action="@{/analysis/oi}">
+<form
+  method="get"
+  action="#"
+  th:action="@{/analysis/oi}"
+  th:object="${analysisDateForm}"
+>
   <legend>Select the month and year for analysis</legend>
   <div class="mb-3">
     <label for="monthField" class="form-label">Month</label>
-    <select id="monthField" class="form-select" name="monthField">
-      <option>January</option>
-      <option>February</option>
-      <option>March</option>
-      <option>April</option>
-      <option>May</option>
-      <option>june</option>
-      <option>July</option>
-      <option>August</option>
-      <option>September</option>
-      <option>October</option>
-      <option>November</option>
-      <option>December</option>
+    <select
+      id="monthField"
+      class="form-select"
+      name="monthField"
+      th:field="*{month}"
+    >
+      <option th:value="1">January</option>
+      <option th:value="2">February</option>
+      <option th:value="3">March</option>
+      <option th:value="4">April</option>
+      <option th:value="5">May</option>
+      <option th:value="6">june</option>
+      <option th:value="7">July</option>
+      <option th:value="8">August</option>
+      <option th:value="9">September</option>
+      <option th:value="10">October</option>
+      <option th:value="11">November</option>
+      <option th:value="12">December</option>
     </select>
   </div>
   <div class="mb-3">
     <label for="yearField" class="form-label">Year</label>
-    <input type="number" class="form-control" name="yearField" required />
+    <input
+      type="number"
+      class="form-control"
+      name="yearField"
+      th:field="*{year}"
+      required
+    />
   </div>
   <button type="submit" class="btn btn-primary">Analyze</button>
 </form>
