@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.emendes.transactionanalyzer.model.AlertType;
-import br.com.emendes.transactionanalyzer.model.Message;
+import br.com.emendes.transactionanalyzer.model.util.AlertType;
+import br.com.emendes.transactionanalyzer.model.util.Message;
 import br.com.emendes.transactionanalyzer.validation.exception.EmailAlreadyRegisteredException;
 
 @ControllerAdvice

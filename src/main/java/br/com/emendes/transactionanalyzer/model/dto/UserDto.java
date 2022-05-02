@@ -3,7 +3,7 @@ package br.com.emendes.transactionanalyzer.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.emendes.transactionanalyzer.model.User;
+import br.com.emendes.transactionanalyzer.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

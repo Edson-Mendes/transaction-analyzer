@@ -11,6 +11,7 @@ public abstract class TransactionLineValidation {
    * @return true se for uma string válida e falso caso contrário
    */
   public static boolean isValid(String transactionLine) {
+    // TODO: Melhorar a validação.
     String[] fields = transactionLine.split(",");
     if (fields.length != 8) {
       return false;

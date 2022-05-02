@@ -3,7 +3,7 @@ package br.com.emendes.transactionanalyzer.model.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import br.com.emendes.transactionanalyzer.model.TransactionsImport;
+import br.com.emendes.transactionanalyzer.model.entity.TransactionsImport;
 import lombok.Getter;
 
 @Getter

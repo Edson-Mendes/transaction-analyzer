@@ -27,7 +27,7 @@ public class AnalyzeController {
     return "page/analysisPage";
   }
 
-  @GetMapping("/oi")
+  @GetMapping("/analyzing")
   public String analyze(@Valid AnalysisDateForm analysisDateForm, RedirectAttributes attributes) {
 
     List<TransactionDto> transactionsDto = analyzeService.findSuspiciousTransactions(

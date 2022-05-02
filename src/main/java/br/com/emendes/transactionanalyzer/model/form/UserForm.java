@@ -4,8 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import br.com.emendes.transactionanalyzer.model.Authority;
-import br.com.emendes.transactionanalyzer.model.User;
+import br.com.emendes.transactionanalyzer.model.entity.Authority;
+import br.com.emendes.transactionanalyzer.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

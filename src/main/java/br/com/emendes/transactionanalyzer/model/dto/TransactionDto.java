@@ -2,7 +2,8 @@ package br.com.emendes.transactionanalyzer.model.dto;
 
 import java.math.BigDecimal;
 
-import br.com.emendes.transactionanalyzer.model.Transaction;
+import br.com.emendes.transactionanalyzer.model.entity.Account;
+import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import lombok.Getter;
 
 @Getter
@@ -19,12 +20,17 @@ public class TransactionDto {
   private final BigDecimal value;
 
   public TransactionDto(Transaction transaction) {
-    this.originBank = transaction.getOriginBank();
-    this.originBranch = transaction.getOriginBranch();
-    this.originAccount = transaction.getOriginAccount();
-    this.destinationBank = transaction.getDestinationBank();
-    this.destinationBranch = transaction.getDestinationBranch();
-    this.destinationAccount = transaction.getDestinationAccount();
+    Account originAccount = transaction.getOriginAccount();
+    Account destinationAccount = transaction.getDestinationAccount();
+
+    this.originBank = originAccount.getBranch().getBank().getName();
+    this.originBranch = originAccount.getBranch().getNumber();
+    this.originAccount = originAccount.getNumber();
+
+    this.destinationBank = destinationAccount.getBranch().getBank().getName();
+    this.destinationBranch = destinationAccount.getBranch().getNumber();
+    this.destinationAccount = destinationAccount.getNumber();
+
     this.value = transaction.getValue();
   }
 

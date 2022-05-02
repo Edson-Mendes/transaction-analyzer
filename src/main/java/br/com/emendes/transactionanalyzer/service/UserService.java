@@ -7,9 +7,9 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.emendes.transactionanalyzer.model.Authority;
-import br.com.emendes.transactionanalyzer.model.User;
 import br.com.emendes.transactionanalyzer.model.dto.UserDto;
+import br.com.emendes.transactionanalyzer.model.entity.Authority;
+import br.com.emendes.transactionanalyzer.model.entity.User;
 import br.com.emendes.transactionanalyzer.model.form.UpdateUserForm;
 import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.repository.UserRepository;
@@ -34,7 +34,7 @@ public class UserService {
     User user = userForm.toUser();
     String password = PasswordGenerator.generate();
 
-    // emailService.sendEmail(user, password);
+    emailService.sendEmail(user, password);
 
     user.setPassword(Encoder.encrypt(password));
     userRepository.save(user);

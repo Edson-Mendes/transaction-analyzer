@@ -1,4 +1,4 @@
-package br.com.emendes.transactionanalyzer.model;
+package br.com.emendes.transactionanalyzer.model.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;

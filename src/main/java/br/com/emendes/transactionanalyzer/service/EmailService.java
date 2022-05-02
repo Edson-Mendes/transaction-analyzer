@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import br.com.emendes.transactionanalyzer.model.User;
+import br.com.emendes.transactionanalyzer.model.entity.User;
 
 @Service
 public class EmailService {

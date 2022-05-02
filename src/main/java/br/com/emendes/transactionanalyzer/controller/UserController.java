@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.emendes.transactionanalyzer.model.AlertType;
-import br.com.emendes.transactionanalyzer.model.Message;
-import br.com.emendes.transactionanalyzer.model.User;
 import br.com.emendes.transactionanalyzer.model.dto.UserDto;
+import br.com.emendes.transactionanalyzer.model.entity.User;
 import br.com.emendes.transactionanalyzer.model.form.UpdateUserForm;
 import br.com.emendes.transactionanalyzer.model.form.UserForm;
+import br.com.emendes.transactionanalyzer.model.util.AlertType;
+import br.com.emendes.transactionanalyzer.model.util.Message;
 import br.com.emendes.transactionanalyzer.service.UserService;
 import lombok.RequiredArgsConstructor;
 

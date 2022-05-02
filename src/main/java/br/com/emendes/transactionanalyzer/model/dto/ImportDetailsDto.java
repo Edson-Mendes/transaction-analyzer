@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import br.com.emendes.transactionanalyzer.model.TransactionsImport;
+import br.com.emendes.transactionanalyzer.model.entity.TransactionsImport;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

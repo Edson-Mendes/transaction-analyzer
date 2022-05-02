@@ -1,4 +1,4 @@
-package br.com.emendes.transactionanalyzer.model;
+package br.com.emendes.transactionanalyzer.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,13 +25,10 @@ public class Transaction {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String originBank;
-  private String originBranch;
-  private String originAccount;
-
-  private String destinationBank;
-  private String destinationBranch;
-  private String destinationAccount;
+  @ManyToOne
+  private Account originAccount;
+  @ManyToOne
+  private Account destinationAccount;
 
   private BigDecimal value;
   private LocalDateTime dateTime;

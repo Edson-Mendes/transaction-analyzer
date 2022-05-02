@@ -15,11 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.emendes.transactionanalyzer.model.AlertType;
-import br.com.emendes.transactionanalyzer.model.Message;
 import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
-import br.com.emendes.transactionanalyzer.service.TransactionsImportService;
+import br.com.emendes.transactionanalyzer.model.util.AlertType;
+import br.com.emendes.transactionanalyzer.model.util.Message;
+import br.com.emendes.transactionanalyzer.service.ImportService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -28,13 +28,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/transactions")
 public class TransactionController {
 
-  private final TransactionsImportService transactionsImportService;
+  private final ImportService importService;
 
   @GetMapping
   public ModelAndView transactionsPage() {
     ModelAndView modelAndView = new ModelAndView("page/transactionsPage.html");
     // TODO: Paginar busca de transações
-    List<TransactionsImportDto> transactionsImport = transactionsImportService.findAll();
+    List<TransactionsImportDto> transactionsImport = importService.findAll();
     modelAndView.addObject("transactionsImport", transactionsImport);
 
     return modelAndView;
@@ -43,8 +43,8 @@ public class TransactionController {
   @GetMapping("/{id}")
   public ModelAndView details(@PathVariable Long id) {
     ModelAndView modelAndView = new ModelAndView("page/importDetailsPage");
-
-    ImportDetailsDto importDetailsDto = transactionsImportService.findById(id);
+    // TODO: fix details aqui
+    ImportDetailsDto importDetailsDto = importService.findById(id);
 
     modelAndView.addObject("importDetails", importDetailsDto);
 
@@ -55,7 +55,7 @@ public class TransactionController {
   @Transactional
   public String submitForm(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
       Principal principal) {
-    transactionsImportService.processImport(file, principal.getName());
+    importService.processImport(file, principal.getName());
 
     final Message message = Message.builder()
         .type(AlertType.SUCCESS)

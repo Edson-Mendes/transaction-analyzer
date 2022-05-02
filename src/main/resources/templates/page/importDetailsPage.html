@@ -10,7 +10,9 @@
         class="mt-3"
         th:insert="fragments/subtitle :: subtitle('TRANSACTIONS IMPORTED')"
       ></div>
-      <div th:insert="fragments/table/transactionsTable"></div>
+      <div
+        th:insert="fragments/table/transactionsTable :: table(${importDetails.transactions})"
+      ></div>
     </div>
   </body>
 </html>
