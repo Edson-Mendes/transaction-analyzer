@@ -34,6 +34,11 @@ public class AnalyzeController {
         analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger());
 
+    Object suspiciousAccounts = analyzeService.findSuspiciousOriginAccounts(
+        analysisDateForm.getMonthAsInteger(),
+        analysisDateForm.getYearAsInteger());
+
+    attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
     attributes.addFlashAttribute("transactionsDto", transactionsDto);
     attributes.addFlashAttribute("analysisDateForm", analysisDateForm);
 

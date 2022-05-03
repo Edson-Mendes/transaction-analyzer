@@ -1,6 +1,5 @@
 package br.com.emendes.transactionanalyzer.model.form;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
