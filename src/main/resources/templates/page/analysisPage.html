@@ -9,15 +9,24 @@
       ></div>
       <div th:if="${message != null}" th:insert="fragments/message"></div>
       <div class="mt-2" th:insert="fragments/form/analysisDateForm"></div>
-
+      <!-- Transações suspeitas -->
       <div
         th:if="${transactionsDto != null && !transactionsDto.isEmpty}"
         th:insert="fragments/subtitle :: subtitle('SUSPICIOUS TRANSACTIONS')"
       ></div>
-
       <div
         th:if="${transactionsDto != null && !transactionsDto.isEmpty}"
         th:insert="fragments/table/transactionsTable :: table(${transactionsDto})"
+      ></div>
+
+      <!-- Contas suspeitas -->
+      <div
+        th:if="${suspiciousAccounts != null && !suspiciousAccounts.isEmpty}"
+        th:insert="fragments/subtitle :: subtitle('SUSPICIOUS ACCOUNTS')"
+      ></div>
+      <div
+        th:if="${suspiciousAccounts != null && !suspiciousAccounts.isEmpty}"
+        th:insert="fragments/table/suspiciousAccountTable"
       ></div>
     </div>
   </body>

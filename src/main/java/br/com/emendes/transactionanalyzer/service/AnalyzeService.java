@@ -2,14 +2,12 @@ package br.com.emendes.transactionanalyzer.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionDto;
-import br.com.emendes.transactionanalyzer.model.entity.Account;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +26,7 @@ public class AnalyzeService {
     return transactionsDto;
   }
 
-  public List<SuspiciousAccountDto> findSuspiciousOriginAccounts(Integer month, Integer year) {
+  public List<SuspiciousAccountDto> findSuspiciousAccounts(Integer month, Integer year) {
     final BigDecimal limit = new BigDecimal("1000000.00");
 
     List<SuspiciousAccountDto> suspiciousOriginAccounts = transactionRepository
@@ -46,6 +44,19 @@ public class AnalyzeService {
 
     suspiciousDestinationAccounts.forEach(suspiciousAccounts::add);
     suspiciousOriginAccounts.forEach(suspiciousAccounts::add);
+
+    // System.out.println("===================================================================");
+    // suspiciousAccounts.forEach(sa -> {
+    // String message = String.format("%s - %s - %s : %s - %s",
+    // sa.getBankName(),
+    // sa.getBranchNumber(),
+    // sa.getAccountNumber(),
+    // sa.getValue(),
+    // sa.getType());
+
+    // System.out.println(message);
+    // });
+    // System.out.println("===================================================================");
 
     return suspiciousAccounts;
   }

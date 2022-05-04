@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionDto;
 import br.com.emendes.transactionanalyzer.model.form.AnalysisDateForm;
 import br.com.emendes.transactionanalyzer.service.AnalyzeService;
@@ -30,13 +31,18 @@ public class AnalyzeController {
   @GetMapping("/analyzing")
   public String analyze(@Valid AnalysisDateForm analysisDateForm, RedirectAttributes attributes) {
 
+    // Buscando transações suspeitas
     List<TransactionDto> transactionsDto = analyzeService.findSuspiciousTransactions(
         analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger());
 
-    Object suspiciousAccounts = analyzeService.findSuspiciousOriginAccounts(
+    // Buscando contas suspeitas
+    List<SuspiciousAccountDto> suspiciousAccounts = analyzeService.findSuspiciousAccounts(
         analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger());
+
+    // Buscando agências suspeitas
+    // TODO: Fazer busca de conta suspeitas.
 
     attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
     attributes.addFlashAttribute("transactionsDto", transactionsDto);

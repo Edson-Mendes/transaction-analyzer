@@ -1,0 +1,24 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">BANK</th>
+      <th scope="col">BRANCH</th>
+      <th scope="col">ACCOUNT</th>
+      <th scope="col">VALUE</th>
+      <th scope="col">TYPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="account : ${suspiciousAccounts}">
+      <td><span th:text="${account.bankName}"></span></td>
+      <td><span th:text="${account.branchNumber}"></span></td>
+      <td><span th:text="${account.accountNumber}"></span></td>
+      <td>
+        <span
+          th:text="${'R$ '+#numbers.formatDecimal(account.value,3,'POINT',2,'COMMA')}"
+        ></span>
+      </td>
+      <td><span th:text="${account.type}"></span></td>
+    </tr>
+  </tbody>
+</table>
