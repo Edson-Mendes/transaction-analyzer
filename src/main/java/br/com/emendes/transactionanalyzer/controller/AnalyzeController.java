@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
+import br.com.emendes.transactionanalyzer.model.dto.SuspiciousBranchDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionDto;
 import br.com.emendes.transactionanalyzer.model.form.AnalysisDateForm;
 import br.com.emendes.transactionanalyzer.service.AnalyzeService;
@@ -42,7 +43,9 @@ public class AnalyzeController {
         analysisDateForm.getYearAsInteger());
 
     // Buscando agências suspeitas
-    // TODO: Fazer busca de conta suspeitas.
+    List<SuspiciousBranchDto> suspiciousBranch = analyzeService.findSuspiciousBranch(
+        analysisDateForm.getMonthAsInteger(),
+        analysisDateForm.getYearAsInteger());
 
     attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
     attributes.addFlashAttribute("transactionsDto", transactionsDto);

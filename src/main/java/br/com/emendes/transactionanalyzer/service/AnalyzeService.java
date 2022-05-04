@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
+import br.com.emendes.transactionanalyzer.model.dto.SuspiciousBranchDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionRepository;
@@ -59,6 +60,40 @@ public class AnalyzeService {
     // System.out.println("===================================================================");
 
     return suspiciousAccounts;
+  }
+
+  public List<SuspiciousBranchDto> findSuspiciousBranch(Integer month, Integer year) {
+    final BigDecimal limit = new BigDecimal("1000000000.00");
+
+    List<SuspiciousBranchDto> suspiciousDestinationBranch = transactionRepository
+        .findSuspiciousDestinationBranch(month, year)
+        .stream()
+        .filter(soa -> soa.getValue().compareTo(limit) >= 1)
+        .toList();
+
+    List<SuspiciousBranchDto> suspiciousOriginBranch = transactionRepository
+        .findSuspiciousOriginBranch(month, year)
+        .stream()
+        .filter(soa -> soa.getValue().compareTo(limit) >= 1)
+        .toList();
+
+    List<SuspiciousBranchDto> suspiciousBranch = new ArrayList<>();
+    suspiciousDestinationBranch.forEach(suspiciousBranch::add);
+    suspiciousOriginBranch.forEach(suspiciousBranch::add);
+
+    // System.out.println("================================================");
+    // suspiciousBranch.forEach(sqb -> {
+    // String message = String.format("%s - %s : %s - %s",
+    // sqb.getBankName(),
+    // sqb.getBranchNumber(),
+    // sqb.getValue(),
+    // sqb.getType());
+
+    // System.out.println(message);
+    // });
+    // System.out.println("================================================");
+
+    return null;
   }
 
 }
