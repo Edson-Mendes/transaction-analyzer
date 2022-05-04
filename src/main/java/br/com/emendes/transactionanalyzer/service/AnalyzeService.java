@@ -46,19 +46,6 @@ public class AnalyzeService {
     suspiciousDestinationAccounts.forEach(suspiciousAccounts::add);
     suspiciousOriginAccounts.forEach(suspiciousAccounts::add);
 
-    // System.out.println("===================================================================");
-    // suspiciousAccounts.forEach(sa -> {
-    // String message = String.format("%s - %s - %s : %s - %s",
-    // sa.getBankName(),
-    // sa.getBranchNumber(),
-    // sa.getAccountNumber(),
-    // sa.getValue(),
-    // sa.getType());
-
-    // System.out.println(message);
-    // });
-    // System.out.println("===================================================================");
-
     return suspiciousAccounts;
   }
 
@@ -81,19 +68,7 @@ public class AnalyzeService {
     suspiciousDestinationBranch.forEach(suspiciousBranch::add);
     suspiciousOriginBranch.forEach(suspiciousBranch::add);
 
-    // System.out.println("================================================");
-    // suspiciousBranch.forEach(sqb -> {
-    // String message = String.format("%s - %s : %s - %s",
-    // sqb.getBankName(),
-    // sqb.getBranchNumber(),
-    // sqb.getValue(),
-    // sqb.getType());
-
-    // System.out.println(message);
-    // });
-    // System.out.println("================================================");
-
-    return null;
+    return suspiciousBranch;
   }
 
 }

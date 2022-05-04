@@ -43,13 +43,14 @@ public class AnalyzeController {
         analysisDateForm.getYearAsInteger());
 
     // Buscando agências suspeitas
-    List<SuspiciousBranchDto> suspiciousBranch = analyzeService.findSuspiciousBranch(
+    List<SuspiciousBranchDto> suspiciousBranches = analyzeService.findSuspiciousBranch(
         analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger());
 
-    attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
-    attributes.addFlashAttribute("transactionsDto", transactionsDto);
     attributes.addFlashAttribute("analysisDateForm", analysisDateForm);
+    attributes.addFlashAttribute("transactionsDto", transactionsDto);
+    attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
+    attributes.addFlashAttribute("suspiciousBranches", suspiciousBranches);
 
     return "redirect:/analysis";
 

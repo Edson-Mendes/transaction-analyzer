@@ -28,6 +28,16 @@
         th:if="${suspiciousAccounts != null && !suspiciousAccounts.isEmpty}"
         th:insert="fragments/table/suspiciousAccountTable"
       ></div>
+
+      <!-- Agências suspeitas -->
+      <div
+        th:if="${suspiciousBranches != null && !suspiciousBranches.isEmpty}"
+        th:insert="fragments/subtitle :: subtitle('SUSPICIOUS BRANCHES')"
+      ></div>
+      <div
+        th:if="${suspiciousBranches != null && !suspiciousBranches.isEmpty}"
+        th:insert="fragments/table/suspiciousBranchTable"
+      ></div>
     </div>
   </body>
 </html>
