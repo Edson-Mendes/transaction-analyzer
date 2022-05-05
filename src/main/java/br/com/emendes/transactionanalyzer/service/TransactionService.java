@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.emendes.transactionanalyzer.model.entity.Account;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
+import br.com.emendes.transactionanalyzer.repository.TransactionRepository;
 import br.com.emendes.transactionanalyzer.validation.TransactionLineValidation;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ public class TransactionService {
 
   private final BankService bankService;
   private final AccountService accountService;
+  private final TransactionRepository transactionRepository;
 
   /**
    * Converte uma lista de Strings que representa as transações, em uma lista de
@@ -90,6 +92,10 @@ public class TransactionService {
         .filter(t -> t.getDateTime().toLocalDate().equals(transactionsDate))
         .collect(Collectors.toList());
 
+  }
+
+  public boolean existsByMonthAndYear(Integer month, Integer year) {
+    return transactionRepository.existsByMonthAndYear(month, year);
   }
 
 }

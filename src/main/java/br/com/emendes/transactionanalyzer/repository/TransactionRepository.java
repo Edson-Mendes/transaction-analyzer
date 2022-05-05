@@ -64,4 +64,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
   List<SuspiciousBranchDto> findSuspiciousOriginBranch(
       @Param("month") Integer month,
       @Param("year") Integer year);
+
+  @Query("SELECT count(t) > 0 FROM Transaction t WHERE MONTH(t.dateTime) = :month AND YEAR(t.dateTime) = :year")
+  boolean existsByMonthAndYear(@Param("month") Integer month, @Param("year") Integer year);
 }

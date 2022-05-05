@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum AlertType {
 
   SUCCESS("alert-success"),
+  WARNING("alert-warning"),
   ERROR("alert-danger");
 
   private final String value;

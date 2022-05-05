@@ -17,6 +17,7 @@ import br.com.emendes.transactionanalyzer.model.form.AnalysisDateForm;
 import br.com.emendes.transactionanalyzer.model.util.AlertType;
 import br.com.emendes.transactionanalyzer.model.util.Message;
 import br.com.emendes.transactionanalyzer.service.AnalyzeService;
+import br.com.emendes.transactionanalyzer.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class AnalyzeController {
 
   private final AnalyzeService analyzeService;
+  private final TransactionService transactionService;
 
   @GetMapping
   public String analyzePage(AnalysisDateForm analysisDateForm) {
@@ -35,8 +37,16 @@ public class AnalyzeController {
   @GetMapping("/analyzing")
   public String analyze(@Valid AnalysisDateForm analysisDateForm, BindingResult bindingResult,
       RedirectAttributes attributes) {
+
+    attributes.addFlashAttribute("analysisDateForm", analysisDateForm);
+
     if (bindingResult.hasErrors()) {
       attributes.addFlashAttribute("message", new Message(AlertType.ERROR, "Invalid fields"));
+      return "redirect:/analysis";
+    }
+    if (!transactionService.existsByMonthAndYear(analysisDateForm.getMonthAsInteger(),
+        analysisDateForm.getYearAsInteger())) {
+      attributes.addFlashAttribute("message", new Message(AlertType.WARNING, "This month hasn't transactions!"));
       return "redirect:/analysis";
     }
     // Buscando transações suspeitas
@@ -54,7 +64,6 @@ public class AnalyzeController {
         analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger());
 
-    attributes.addFlashAttribute("analysisDateForm", analysisDateForm);
     attributes.addFlashAttribute("transactionsDto", transactionsDto);
     attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
     attributes.addFlashAttribute("suspiciousBranches", suspiciousBranches);
