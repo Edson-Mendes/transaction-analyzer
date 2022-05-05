@@ -59,3 +59,7 @@ logging:
         sql: DEBUG
         type: trace
 
+# enable errors while binding
+server:
+  error:
+    include-binding-errors: always

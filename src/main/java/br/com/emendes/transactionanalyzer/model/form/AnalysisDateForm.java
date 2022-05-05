@@ -2,6 +2,8 @@ package br.com.emendes.transactionanalyzer.model.form;
 
 import javax.validation.constraints.NotEmpty;
 
+import br.com.emendes.transactionanalyzer.validation.annotation.MonthNumber;
+import br.com.emendes.transactionanalyzer.validation.annotation.YearValidation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +14,11 @@ import lombok.NoArgsConstructor;
 public class AnalysisDateForm {
 
   @NotEmpty
+  @MonthNumber
   private String month;
 
   @NotEmpty
+  @YearValidation
   private String year;
 
   public Integer getMonthAsInteger() {

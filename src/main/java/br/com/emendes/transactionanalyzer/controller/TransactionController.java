@@ -43,7 +43,6 @@ public class TransactionController {
   @GetMapping("/{id}")
   public ModelAndView details(@PathVariable Long id) {
     ModelAndView modelAndView = new ModelAndView("page/importDetailsPage");
-    // TODO: fix details aqui
     ImportDetailsDto importDetailsDto = importService.findById(id);
 
     modelAndView.addObject("importDetails", importDetailsDto);
