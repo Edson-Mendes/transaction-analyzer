@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>br.com.emendes</groupId>
 	<artifactId>transaction-analyzer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>transaction-analyzer</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto proposto pelo challenge backend 3 ed da Alura</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -50,7 +50,7 @@
 	  <dependency>
 	    <groupId>org.projectlombok</groupId>
 	    <artifactId>lombok</artifactId>
-	    <scope>annotationProcessor</scope>
+	    <scope>provided</scope>
 	  </dependency>
 
 	  <dependency>
@@ -77,6 +77,12 @@
 	  <dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
+	    <scope>runtime</scope>
+	  </dependency>
+
+	  <dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
 	    <scope>runtime</scope>
 	  </dependency>
 	</dependencies>
