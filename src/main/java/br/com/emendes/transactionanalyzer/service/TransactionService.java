@@ -1,8 +1,6 @@
 package br.com.emendes.transactionanalyzer.service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.emendes.transactionanalyzer.model.entity.Account;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
+import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionRepository;
-import br.com.emendes.transactionanalyzer.validation.TransactionLineValidation;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -31,11 +29,11 @@ public class TransactionService {
    * @param transactionsLines
    * @return Lista de transações
    */
-  public List<Transaction> generateTransactionsList(List<String> transactionsLines) {
+  public List<Transaction> generateTransactionsList(List<RawTransaction> rawTransactions) {
     List<Transaction> transactions = new ArrayList<>();
 
-    transactionsLines.forEach(transactionLine -> {
-      Transaction transaction = generateTransaction(transactionLine);
+    rawTransactions.forEach(rt -> {
+      Transaction transaction = generateTransaction(rt);
       if (transaction != null) {
         transactions.add(transaction);
       }
@@ -44,48 +42,36 @@ public class TransactionService {
     return transactions;
   }
 
-  private Transaction generateTransaction(String transactionLine) {
-    if (TransactionLineValidation.isValid(transactionLine)) {
-      String[] transactionFields = transactionLine.split(",");
+  private Transaction generateTransaction(RawTransaction rawTransaction) {
 
-      String originBankName = transactionFields[0].toUpperCase();
-      String originBranchNumber = transactionFields[1];
-      String originAccountNumber = transactionFields[2];
+    if (bankService.existsByName(rawTransaction.getOriginBank()) &&
+        bankService.existsByName(rawTransaction.getDestinationBank())) {
 
-      String destinationBankName = transactionFields[3].toUpperCase();
-      String destinationBranchNumber = transactionFields[4];
-      String destinationAccountNumber = transactionFields[5];
+      try {
+        Account originAccount = accountService.createIfNotExists(
+            rawTransaction.getOriginAccount(),
+            rawTransaction.getOriginBranch(),
+            rawTransaction.getOriginBank());
+        Account destinationAccount = accountService.createIfNotExists(
+            rawTransaction.getDestinationAccount(),
+            rawTransaction.getDestinationBranch(),
+            rawTransaction.getDestinationBank());
 
-      if (bankService.existsByName(originBankName) && bankService.existsByName(destinationBankName)) {
-
-        try {
-          Account originAccount = accountService.createIfNotExists(
-              originAccountNumber,
-              originBranchNumber,
-              originBankName);
-          Account destinationAccount = accountService.createIfNotExists(
-              destinationAccountNumber,
-              destinationBranchNumber,
-              destinationBankName);
-
-          BigDecimal value = new BigDecimal(transactionFields[6]);
-          LocalDateTime transactionDateTime = LocalDateTime.parse(transactionFields[7]);
-
-          return Transaction.builder()
-              .originAccount(originAccount)
-              .destinationAccount(destinationAccount)
-              .value(value)
-              .dateTime(transactionDateTime)
-              .build();
-        } catch (Exception e) {
-          System.out.println("Something went wrong");
-        }
+        return Transaction.builder()
+            .originAccount(originAccount)
+            .destinationAccount(destinationAccount)
+            .value(rawTransaction.getValue())
+            .dateTime(rawTransaction.getDateTime())
+            .build();
+      } catch (Exception e) {
+        System.out.println("Something went wrong");
       }
-
     }
+
     return null;
   }
 
+  // TODO: Not used
   public List<Transaction> filterTransactionByDate(List<Transaction> transactions, LocalDate transactionsDate) {
     return transactions
         .stream()

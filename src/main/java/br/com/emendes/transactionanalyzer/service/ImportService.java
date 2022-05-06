@@ -15,10 +15,12 @@ import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import br.com.emendes.transactionanalyzer.model.entity.TransactionsImport;
 import br.com.emendes.transactionanalyzer.model.entity.User;
+import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
 import br.com.emendes.transactionanalyzer.util.ReadFile;
 import br.com.emendes.transactionanalyzer.validation.exception.ImportNotFoundException;
+import br.com.emendes.transactionanalyzer.validation.exception.InvalidFileException;
 import br.com.emendes.transactionanalyzer.validation.exception.TransactionsDateAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 
@@ -53,25 +55,30 @@ public class ImportService {
   }
 
   public void processImport(MultipartFile file, String email) {
-    List<String> transactionsLines = ReadFile.readMultipartFile(file);
-    List<Transaction> transactions = transactionService.generateTransactionsList(transactionsLines);
+    List<String> transactionLines = ReadFile.readMultipartFile(file);
 
-    // Verifica se já existe um import no banco de dados com essa data.
-    // TODO: Fazer a verificação antes de generateTransactionsList.
-    LocalDate transactionsDate = transactions.get(0).getDateTime().toLocalDate();
+    List<RawTransaction> rawTransactions = RawTransaction.from(transactionLines);
+
+    if (rawTransactions.isEmpty()) {
+      throw new InvalidFileException("File hasn't valid transactions");
+    }
+    LocalDate transactionsDate = rawTransactions.get(0).getDateTime().toLocalDate();
     if (transactionsImportRepository.existsByTransactionsDate(transactionsDate)) {
       String message = String.format("Já existe transações do dia %s",
           transactionsDate.format(DateFormatter.formatter));
       throw new TransactionsDateAlreadyExistsException(message);
     }
+    List<RawTransaction> filteredRawTransactions = RawTransaction.filterByDate(rawTransactions, transactionsDate);
 
-    List<Transaction> filteredTransactions = transactionService.filterTransactionByDate(transactions, transactionsDate);
+    // FIXME: Caso o nome dos bancos sejam inválidos, retornará uma lista vazia.
+    List<Transaction> transactions = transactionService.generateTransactionsList(filteredRawTransactions);
+
     User user = userService.findByEmail(email);
 
     TransactionsImport transactionsImport = TransactionsImport.builder()
         .transactionsDate(transactionsDate)
         .importDateTime(LocalDateTime.now())
-        .transactions(filteredTransactions)
+        .transactions(transactions)
         .user(user)
         .build();
 

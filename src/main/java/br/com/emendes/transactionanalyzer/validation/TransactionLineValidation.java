@@ -1,5 +1,6 @@
 package br.com.emendes.transactionanalyzer.validation;
 
+// TODO: Not used
 public abstract class TransactionLineValidation {
 
   /**

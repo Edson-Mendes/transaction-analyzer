@@ -8,7 +8,7 @@ import java.util.Scanner;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.emendes.transactionanalyzer.validation.exception.CouldNotReadFileException;
-import br.com.emendes.transactionanalyzer.validation.exception.EmptyFileException;
+import br.com.emendes.transactionanalyzer.validation.exception.InvalidFileException;
 
 public abstract class ReadFile {
 
@@ -17,11 +17,11 @@ public abstract class ReadFile {
    * arquivo.
    * 
    * @return Uma lista com as linhas do arquivo
-   * @throws EmptyFileException se o arquivo estiver vazio
+   * @throws InvalidFileException se o arquivo estiver vazio
    */
   public static List<String> readMultipartFile(MultipartFile file) {
     if (file.isEmpty()) {
-      throw new EmptyFileException("Arquivo vazio");
+      throw new InvalidFileException("Arquivo vazio");
     }
     List<String> transactions = new ArrayList<>();
     try (Scanner input = new Scanner(file.getInputStream())) {

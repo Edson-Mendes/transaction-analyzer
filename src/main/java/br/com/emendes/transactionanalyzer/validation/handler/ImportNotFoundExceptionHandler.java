@@ -7,13 +7,13 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.emendes.transactionanalyzer.model.util.AlertType;
 import br.com.emendes.transactionanalyzer.model.util.Message;
-import br.com.emendes.transactionanalyzer.validation.exception.EmptyFileException;
+import br.com.emendes.transactionanalyzer.validation.exception.ImportNotFoundException;
 
 @ControllerAdvice
-public class EmptyFileExceptionHandler {
+public class ImportNotFoundExceptionHandler {
 
-  @ExceptionHandler(value = EmptyFileException.class)
-  public RedirectView handle(EmptyFileException exception, RedirectAttributes attributes) {
+  @ExceptionHandler(value = ImportNotFoundException.class)
+  public RedirectView handle(ImportNotFoundException exception, RedirectAttributes attributes) {
     final Message message = Message.builder()
         .type(AlertType.ERROR)
         .message(exception.getMessage())
