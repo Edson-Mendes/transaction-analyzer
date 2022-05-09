@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-// TODO: Mudar nome para mapeamento para /imports
+// TODO: Mudar mapeamento para /imports
 @RequestMapping("/transactions")
 public class TransactionController {
 

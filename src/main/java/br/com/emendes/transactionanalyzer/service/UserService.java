@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.emendes.transactionanalyzer.exception.EmailAlreadyRegisteredException;
+import br.com.emendes.transactionanalyzer.exception.UserNotFoundException;
 import br.com.emendes.transactionanalyzer.model.dto.UserDto;
 import br.com.emendes.transactionanalyzer.model.entity.Authority;
 import br.com.emendes.transactionanalyzer.model.entity.User;
@@ -15,8 +17,6 @@ import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.repository.UserRepository;
 import br.com.emendes.transactionanalyzer.util.Encoder;
 import br.com.emendes.transactionanalyzer.util.PasswordGenerator;
-import br.com.emendes.transactionanalyzer.validation.exception.EmailAlreadyRegisteredException;
-import br.com.emendes.transactionanalyzer.validation.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service

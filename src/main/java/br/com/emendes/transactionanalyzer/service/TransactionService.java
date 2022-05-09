@@ -1,9 +1,7 @@
 package br.com.emendes.transactionanalyzer.service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -69,15 +67,6 @@ public class TransactionService {
     }
 
     return null;
-  }
-
-  // TODO: Not used
-  public List<Transaction> filterTransactionByDate(List<Transaction> transactions, LocalDate transactionsDate) {
-    return transactions
-        .stream()
-        .filter(t -> t.getDateTime().toLocalDate().equals(transactionsDate))
-        .collect(Collectors.toList());
-
   }
 
   public boolean existsByMonthAndYear(Integer month, Integer year) {

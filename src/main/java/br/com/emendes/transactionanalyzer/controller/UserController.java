@@ -69,7 +69,8 @@ public class UserController {
     }
     userService.create(userForm);
 
-    attributes.addFlashAttribute("message", new Message(AlertType.SUCCESS, "User registered successfully"));
+    attributes.addFlashAttribute("message",
+        new Message(AlertType.SUCCESS, "User registered successfully, the password has been sent to your email!"));
     return new RedirectView("/users");
   }
 
