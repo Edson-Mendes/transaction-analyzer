@@ -28,10 +28,7 @@ public class EmailService {
     try {
       mailSender.send(message);
     } catch (Exception e) {
-      System.out.println("==========================================================");
-      System.out.println("Something went wrong!!!");
       System.out.println(e.getMessage());
-      System.out.println("==========================================================");
     }
   }
 

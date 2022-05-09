@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.emendes.transactionanalyzer.validation.exception.CouldNotReadFileException;
-import br.com.emendes.transactionanalyzer.validation.exception.InvalidFileException;
+import br.com.emendes.transactionanalyzer.exception.CouldNotReadFileException;
+import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
 
 public abstract class ReadFile {
 
@@ -21,7 +21,7 @@ public abstract class ReadFile {
    */
   public static List<String> readMultipartFile(MultipartFile file) {
     if (file.isEmpty()) {
-      throw new InvalidFileException("Arquivo vazio");
+      throw new InvalidFileException("Empty file");
     }
     List<String> transactions = new ArrayList<>();
     try (Scanner input = new Scanner(file.getInputStream())) {
@@ -29,7 +29,7 @@ public abstract class ReadFile {
         transactions.add(input.nextLine());
       }
     } catch (IOException e) {
-      String message = String.format("Não foi possível ler o arquivo %s", file.getOriginalFilename());
+      String message = String.format("Could not read the file %s", file.getOriginalFilename());
       throw new CouldNotReadFileException(message);
     }
 

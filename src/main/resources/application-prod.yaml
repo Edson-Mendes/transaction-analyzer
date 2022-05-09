@@ -1,17 +1,17 @@
 # datasource
 spring:
   datasource:
-    url: ${DATABASE}
+    url: ${URL_DB}
     username: ${USERNAME_DB}
     password: ${PASSWORD_DB}
+
 # sql
   sql:
     init:
-      mode: always
+      mode: never
 
 # jpa
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -36,8 +36,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${USERNAME}
-    password: ${APP_PASSWORD}
+    username: ${USERNAME_MAIL}
+    password: ${PASSWORD_MAIL}
     properties:
       mail:
         smtp:
@@ -57,4 +57,3 @@ logging:
 server:
   error:
     include-binding-errors: always
-  port: ${PORT}

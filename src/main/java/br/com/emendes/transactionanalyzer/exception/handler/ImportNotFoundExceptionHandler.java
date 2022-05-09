@@ -1,13 +1,13 @@
-package br.com.emendes.transactionanalyzer.validation.handler;
+package br.com.emendes.transactionanalyzer.exception.handler;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.emendes.transactionanalyzer.exception.ImportNotFoundException;
 import br.com.emendes.transactionanalyzer.model.util.AlertType;
 import br.com.emendes.transactionanalyzer.model.util.Message;
-import br.com.emendes.transactionanalyzer.validation.exception.ImportNotFoundException;
 
 @ControllerAdvice
 public class ImportNotFoundExceptionHandler {

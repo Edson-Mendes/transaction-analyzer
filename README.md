@@ -20,12 +20,13 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `Editar usuário`: Usuários autenticados podem editar informações de outros usuários.
 - `Deletar usuário`: Usuários autenticados podem desabilitar o acesso de outros usuário, usuário NÃO podem se auto desabilitar.
 - `Lista de usuários`: Uma tela para mostrar todos os usuários cadastrados e suas informações, assim como os botões de *EDITAR* e *DELETAR*.
+- `Análise de transações`: Uma tela para o usuário informar o mês e ano que deseja a análise, a aplicação mostra as transações suspeitas (transações igual ou superior a R$100.000,00), contas suspeitas (Se o somatório de movimentações no mês for superior a R$1.000.000,00) e agências suspeitas (Se o somatório de movimentações no mês for superior a R$1.000.000.000,00)
 
 ## :toolbox: Tecnologias
 - `VSCode`
 - `Java 17`
 - `Maven`
-- `Spring Boot`
+- `Spring Boot, Spring MVC, Spring Data JPA, Spring Security`
 - `H2 database`
 - `Thymeleaf`
 - `Lombok`

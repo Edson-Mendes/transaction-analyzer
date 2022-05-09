@@ -10,6 +10,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.emendes.transactionanalyzer.exception.ImportNotFoundException;
+import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
+import br.com.emendes.transactionanalyzer.exception.TransactionsDateAlreadyExistsException;
 import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
 import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
@@ -19,9 +22,6 @@ import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
 import br.com.emendes.transactionanalyzer.util.ReadFile;
-import br.com.emendes.transactionanalyzer.validation.exception.ImportNotFoundException;
-import br.com.emendes.transactionanalyzer.validation.exception.InvalidFileException;
-import br.com.emendes.transactionanalyzer.validation.exception.TransactionsDateAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 
 @Service

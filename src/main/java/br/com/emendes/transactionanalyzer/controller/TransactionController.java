@@ -58,7 +58,7 @@ public class TransactionController {
 
     final Message message = Message.builder()
         .type(AlertType.SUCCESS)
-        .message("Arquivo processado com sucesso")
+        .message("File processed successfully")
         .build();
     attributes.addFlashAttribute("message", message);
     return "redirect:/transactions";

@@ -2,9 +2,9 @@ package br.com.emendes.transactionanalyzer.service;
 
 import org.springframework.stereotype.Service;
 
+import br.com.emendes.transactionanalyzer.exception.BankNotFoundException;
 import br.com.emendes.transactionanalyzer.model.entity.Bank;
 import br.com.emendes.transactionanalyzer.repository.BankRepository;
-import br.com.emendes.transactionanalyzer.validation.exception.BankNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
