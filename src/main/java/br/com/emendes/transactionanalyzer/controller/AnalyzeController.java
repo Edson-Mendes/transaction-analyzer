@@ -30,14 +30,13 @@ public class AnalyzeController {
 
   @GetMapping
   public String analyzePage(AnalysisDateForm analysisDateForm) {
-
     return "page/analysisPage";
   }
 
   @GetMapping("/analyzing")
   public String analyze(@Valid AnalysisDateForm analysisDateForm, BindingResult bindingResult,
       RedirectAttributes attributes) {
-
+    // TODO: Refatorar esse método.
     attributes.addFlashAttribute("analysisDateForm", analysisDateForm);
 
     if (bindingResult.hasErrors()) {
@@ -46,7 +45,8 @@ public class AnalyzeController {
     }
     if (!transactionService.existsByMonthAndYear(analysisDateForm.getMonthAsInteger(),
         analysisDateForm.getYearAsInteger())) {
-      attributes.addFlashAttribute("message", new Message(AlertType.WARNING, "This month hasn't transactions!"));
+      attributes.addFlashAttribute("message",
+          new Message(AlertType.WARNING, "This month hasn't transactions!"));
       return "redirect:/analysis";
     }
     // Buscando transações suspeitas
@@ -67,6 +67,11 @@ public class AnalyzeController {
     attributes.addFlashAttribute("transactionsDto", transactionsDto);
     attributes.addFlashAttribute("suspiciousAccounts", suspiciousAccounts);
     attributes.addFlashAttribute("suspiciousBranches", suspiciousBranches);
+
+    if (transactionsDto.isEmpty() && suspiciousAccounts.isEmpty() && suspiciousBranches.isEmpty()) {
+      attributes.addFlashAttribute("message",
+          new Message(AlertType.SUCCESS, "Nothing suspicious"));
+    }
 
     return "redirect:/analysis";
 
