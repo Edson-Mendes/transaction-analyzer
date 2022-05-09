@@ -93,6 +93,13 @@ public class RawTransaction {
     }
   }
 
+  /**
+   * Filtra transações por data
+   * 
+   * @param transactions     lista de transações a serem filtradas
+   * @param transactionsDate data válida
+   * @return Lista filtrada de transações
+   */
   public static List<RawTransaction> filterByDate(List<RawTransaction> transactions, LocalDate transactionsDate) {
     return transactions
         .stream()

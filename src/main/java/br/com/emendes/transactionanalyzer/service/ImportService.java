@@ -64,14 +64,17 @@ public class ImportService {
     }
     LocalDate transactionsDate = rawTransactions.get(0).getDateTime().toLocalDate();
     if (transactionsImportRepository.existsByTransactionsDate(transactionsDate)) {
-      String message = String.format("Já existe transações do dia %s",
+      String message = String.format("Already exists a imported file for %s",
           transactionsDate.format(DateFormatter.formatter));
       throw new TransactionsDateAlreadyExistsException(message);
     }
     List<RawTransaction> filteredRawTransactions = RawTransaction.filterByDate(rawTransactions, transactionsDate);
 
-    // FIXME: Caso o nome dos bancos sejam inválidos, retornará uma lista vazia.
     List<Transaction> transactions = transactionService.generateTransactionsList(filteredRawTransactions);
+
+    if (transactions.isEmpty()) {
+      throw new InvalidFileException("File hasn't valid transactions");
+    }
 
     User user = userService.findByEmail(email);
 

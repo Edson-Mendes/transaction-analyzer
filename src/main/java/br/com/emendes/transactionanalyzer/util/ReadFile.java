@@ -23,6 +23,9 @@ public abstract class ReadFile {
     if (file.isEmpty()) {
       throw new InvalidFileException("Empty file");
     }
+    if (!file.getOriginalFilename().endsWith("csv")) {
+      throw new InvalidFileException("Unsupported file");
+    }
     List<String> transactions = new ArrayList<>();
     try (Scanner input = new Scanner(file.getInputStream())) {
       while (input.hasNextLine()) {
