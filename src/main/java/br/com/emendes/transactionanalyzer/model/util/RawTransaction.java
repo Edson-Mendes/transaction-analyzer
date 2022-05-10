@@ -1,12 +1,17 @@
 package br.com.emendes.transactionanalyzer.model.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.com.emendes.transactionanalyzer.validation.TransactionsValidator;
 import lombok.Data;
 
+/**
+ * Classe que recebe os dados brutos de uma transação.
+ */
 @Data
 public class RawTransaction {
 
@@ -32,65 +37,22 @@ public class RawTransaction {
     this.destinationBranch = fields[4];
     this.destinationAccount = fields[5];
 
-    this.value = new BigDecimal(fields[6]);
+    this.value = new BigDecimal(fields[6]).setScale(2, RoundingMode.DOWN);
     this.dateTime = LocalDateTime.parse(fields[7]);
   }
 
-  public static List<RawTransaction> from(List<String> transactionLines) {
+  /**
+   * Filtra e converte uma lista de string (transações) em uma lista de
+   * RawTransaction
+   */
+  public static List<RawTransaction> fromTransactionsLines(List<String> transactionLines) {
     List<RawTransaction> transactions = transactionLines
         .stream()
-        .filter(tl -> isValid(tl))
+        .filter(tl -> TransactionsValidator.isValid(tl))
         .map(tlv -> new RawTransaction(tlv))
         .toList();
 
     return transactions;
-  }
-
-  /**
-   * Método para validar transações
-   * <p>
-   * <b>validações:</b>
-   * </p>
-   * <ul>
-   * <li>A transação deve ter 8 campos</li>
-   * <li>Nenhum campo pode estar vazio</li>
-   * <li>O campo value (7) deve ser um BigDecimal válido</li>
-   * <li>O campo dateTime (8) deve ser um LocalDateTime válido</li>
-   * </ul>
-   */
-  private static boolean isValid(String transactionLine) {
-
-    String[] fields = transactionLine.split(",");
-    if (fields.length != 8) {
-      return false;
-    }
-    for (String field : fields) {
-      if (field.isBlank()) {
-        return false;
-      }
-    }
-    String value = fields[6];
-    String dateTime = fields[7];
-
-    return validValue(value) && validDateTime(dateTime);
-  }
-
-  private static boolean validValue(String value) {
-    try {
-      new BigDecimal(value);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  private static boolean validDateTime(String dateTime) {
-    try {
-      LocalDateTime.parse(dateTime);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   /**

@@ -57,7 +57,7 @@ public class ImportService {
   public void processImport(MultipartFile file, String email) {
     List<String> transactionLines = ReadFile.readMultipartFile(file);
 
-    List<RawTransaction> rawTransactions = RawTransaction.from(transactionLines);
+    List<RawTransaction> rawTransactions = RawTransaction.fromTransactionsLines(transactionLines);
 
     if (rawTransactions.isEmpty()) {
       throw new InvalidFileException("File hasn't valid transactions");
