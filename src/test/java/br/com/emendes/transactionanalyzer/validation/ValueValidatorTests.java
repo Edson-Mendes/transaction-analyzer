@@ -34,8 +34,8 @@ class ValueValidatorTests {
   }
 
   @Test
-  @DisplayName("Return false when value is less then 0.01")
-  void returnFalseWhenValueIsLessThenMin() {
+  @DisplayName("Return false when value is less than 0.01")
+  void returnFalseWhenValueIsLessThanMin() {
     String smallValue1 = "0.009";
     String smallValue2 = "0.009999";
     String smallValue3 = "0.0009";
@@ -46,8 +46,8 @@ class ValueValidatorTests {
   }
 
   @Test
-  @DisplayName("Return false when value is bigger then 9999999999999.99")
-  void returnFalseWhenValueIsBiggerThenMax() {
+  @DisplayName("Return false when value is bigger than 9999999999999.99")
+  void returnFalseWhenValueIsBiggerThanMax() {
     String biggerValue1 = "10000000000000.00";
     String biggerValue2 = "100000000000000.00";
     String biggerValue3 = "1000000000000000.00";

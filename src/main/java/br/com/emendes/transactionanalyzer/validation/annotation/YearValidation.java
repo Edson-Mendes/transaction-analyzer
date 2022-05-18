@@ -6,8 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
 @Target(ElementType.FIELD)
@@ -19,22 +17,5 @@ public @interface YearValidation {
   Class<?>[] groups() default {};
 
   Class<? extends Payload>[] payload() default {};
-
-}
-
-class YearValidator implements ConstraintValidator<YearValidation, String> {
-
-  @Override
-  public boolean isValid(String value, ConstraintValidatorContext context) {
-    try {
-      Integer.valueOf(value);
-      if (value.length() == 4) {
-        return true;
-      }
-    } catch (Exception e) {
-      return false;
-    }
-    return false;
-  }
 
 }

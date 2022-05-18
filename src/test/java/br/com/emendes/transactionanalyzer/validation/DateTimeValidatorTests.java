@@ -41,7 +41,7 @@ public class DateTimeValidatorTests {
 
   @Test
   @DisplayName("Return false when dateTime is before 1970-01-01T00:00:00")
-  public void returnFalseWhenDateTimeIsBeforeThenMinDateTime() {
+  public void returnFalseWhenDateTimeIsBeforeThanMinDateTime() {
     String beforeMinDateTime1 = "1969-12-31T23:59:59";
     String beforeMinDateTime2 = "1900-10-03T10:19:12";
     String beforeMinDateTime3 = "1000-10-03T10:19:12";
@@ -52,8 +52,8 @@ public class DateTimeValidatorTests {
   }
 
   @Test
-  @DisplayName("Return false when dateTime is after then 2099-12-31T23:59:59")
-  public void returnFalseWhenDateTimeIsAfterThenMaxDateTime() {
+  @DisplayName("Return false when dateTime is after than 2099-12-31T23:59:59")
+  public void returnFalseWhenDateTimeIsAfterThanMaxDateTime() {
     String afterMaxDateTime1 = "2100-01-01T00:00:00";
     String afterMaxDateTime2 = "2222-11-22T22:22:22";
     String afterMaxDateTime3 = "9999-09-09T09:09:09";
