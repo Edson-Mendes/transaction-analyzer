@@ -34,6 +34,7 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `HTML5`
 - `Bootstrap`
 - `MySQL`
+- `JUnit 5`
 
 ## :hammer_and_wrench: Deploy
 O deploy da aplicação foi realizado no **Heroku**, você pode testar/brincar/usar [aqui](https://transactions-analyzer-app.herokuapp.com), fique a vontade para usar o login **admin@email.com.br** e senha **123999**

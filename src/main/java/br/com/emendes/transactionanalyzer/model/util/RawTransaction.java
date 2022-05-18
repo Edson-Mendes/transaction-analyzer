@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import br.com.emendes.transactionanalyzer.validation.TransactionsValidator;
+import br.com.emendes.transactionanalyzer.validation.TransactionValidator;
 import lombok.Data;
 
 /**
@@ -48,7 +48,7 @@ public class RawTransaction {
   public static List<RawTransaction> fromTransactionsLines(List<String> transactionLines) {
     List<RawTransaction> transactions = transactionLines
         .stream()
-        .filter(tl -> TransactionsValidator.isValid(tl))
+        .filter(tl -> TransactionValidator.validate(tl))
         .map(tlv -> new RawTransaction(tlv))
         .toList();
 
