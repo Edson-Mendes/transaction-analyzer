@@ -78,6 +78,7 @@ class AccountRepositoryTests {
     Assertions.assertThat(optionalAccountFinded.isPresent()).isFalse();
   }
 
+  // TODO: Refatorar todos os métodos abaixo.
   // Cria uma objeto Account com Branch que não existe no DB.
   private Account createAnotherAccount() {
     Branch branch = Branch.builder()
