@@ -28,11 +28,11 @@ public class AccountService {
     return account;
   }
 
-  private Account save(Account account) {
+  public Account save(Account account) {
     return accountRepository.save(account);
   }
 
-  private Account findBy(String accountNumber, String branchNumber, String bankName) {
+  public Account findBy(String accountNumber, String branchNumber, String bankName) {
     return accountRepository
         .findByNumberAndNumberBranchAndBankName(accountNumber, branchNumber, bankName)
         .orElse(null);
