@@ -12,4 +12,11 @@ public class BranchCreator {
         .build();
   }
 
+  public static Branch validBranchWithoutId() {
+    return Branch.builder()
+        .number("1234")
+        .bank(BankCreator.validBank())
+        .build();
+  }
+
 }

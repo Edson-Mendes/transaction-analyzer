@@ -30,11 +30,11 @@ public class BranchService {
     return branch;
   }
 
-  private Branch save(Branch branch) {
+  public Branch save(Branch branch) {
     return branchRepository.save(branch);
   }
 
-  private Branch findByBranchNumberAndBankName(String branchNumber, String bankName) {
+  public Branch findByBranchNumberAndBankName(String branchNumber, String bankName) {
     return branchRepository.findByBranchNumberAndBankName(branchNumber, bankName).orElse(null);
   }
 

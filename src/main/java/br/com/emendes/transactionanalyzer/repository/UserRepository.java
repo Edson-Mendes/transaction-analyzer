@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
       @Param("authority") Authority authority);
 
   @Query("SELECT u FROM User u WHERE :authority NOT MEMBER OF u.authorities")
-  List<User> findByAuthority(@Param("authority") Authority authority);
+  List<User> findAllNotAdmin(@Param("authority") Authority authority);
 
   @Query("SELECT u FROM User u WHERE u.id = :id AND u.email != :email AND :authority NOT MEMBER OF u.authorities")
   Optional<User> findByIdWhereEmailNotEqualsAndNotAdmin(@Param("id") Long id, @Param("email") String email,

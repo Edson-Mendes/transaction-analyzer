@@ -26,7 +26,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final EmailService emailService;
 
-  public void create(UserForm userForm) {
+  public User create(UserForm userForm) {
     if (userRepository.existsByEmail(userForm.getEmail())) {
       throw new EmailAlreadyRegisteredException("This email address is already registered!");
     }
@@ -37,15 +37,14 @@ public class UserService {
     emailService.sendEmail(user, password);
 
     user.setPassword(Encoder.encrypt(password));
-    userRepository.save(user);
-
+    return userRepository.save(user);
   }
 
   public List<UserDto> readAll() {
     // TODO: Paginar a busca por usuários.
 
     Authority authority = new Authority("ADMIN");
-    List<User> users = userRepository.findByAuthority(authority);
+    List<User> users = userRepository.findAllNotAdmin(authority);
 
     List<UserDto> usersDto = UserDto.fromUserList(users);
 
@@ -58,7 +57,7 @@ public class UserService {
     userRepository.deleteByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority);
   }
 
-  public void disableUser(Long id, String email) {
+  public User disableUser(Long id, String email) {
     Authority authority = new Authority("ADMIN");
     User user = userRepository.findByIdWhereEmailNotEqualsAndNotAdmin(id, email, authority)
         .orElseThrow(() -> {
@@ -66,16 +65,14 @@ public class UserService {
         });
 
     user.setEnabled(false);
-    userRepository.save(user);
+    return userRepository.save(user);
   }
 
-  public void update(Long id, @Valid UpdateUserForm updateForm) {
-    User user = userRepository.findById(id).orElseThrow(() -> {
-      throw new UserNotFoundException("User not found");
-    });
+  public User update(Long id, @Valid UpdateUserForm updateForm) {
+    User user = findById(id);
 
     user.setName(updateForm.getName());
-    userRepository.save(user);
+    return userRepository.save(user);
   }
 
   public User findById(Long id) {
