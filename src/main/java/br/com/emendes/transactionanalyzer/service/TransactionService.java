@@ -1,5 +1,7 @@
 package br.com.emendes.transactionanalyzer.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +60,8 @@ public class TransactionService {
         return Transaction.builder()
             .originAccount(originAccount)
             .destinationAccount(destinationAccount)
-            .value(rawTransaction.getValue())
-            .dateTime(rawTransaction.getDateTime())
+            .value(new BigDecimal(rawTransaction.getValue()))
+            .dateTime(LocalDateTime.parse(rawTransaction.getDateTime()))
             .build();
       } catch (Exception e) {
         System.out.println("Something went wrong");

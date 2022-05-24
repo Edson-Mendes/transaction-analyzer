@@ -1,18 +1,29 @@
 package br.com.emendes.transactionanalyzer.model.util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import br.com.emendes.transactionanalyzer.validation.TransactionValidator;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Classe que recebe os dados brutos de uma transação.
  */
 @Data
+@NoArgsConstructor
+@JsonPropertyOrder({
+    "originBank",
+    "originBranch",
+    "originAccount",
+    "destinationBank",
+    "destinationBranch",
+    "destinationAccount",
+    "value",
+    "dateTime" })
 public class RawTransaction {
 
   private String originBank;
@@ -23,8 +34,8 @@ public class RawTransaction {
   private String destinationBranch;
   private String destinationAccount;
 
-  private BigDecimal value;
-  private LocalDateTime dateTime;
+  private String value;
+  private String dateTime;
 
   public RawTransaction(String transactionLine) {
     String[] fields = transactionLine.split(",");
@@ -37,8 +48,8 @@ public class RawTransaction {
     this.destinationBranch = fields[4];
     this.destinationAccount = fields[5];
 
-    this.value = new BigDecimal(fields[6]).setScale(2, RoundingMode.DOWN);
-    this.dateTime = LocalDateTime.parse(fields[7]);
+    this.value = fields[6];
+    this.dateTime = fields[7];
   }
 
   /**
@@ -65,7 +76,7 @@ public class RawTransaction {
   public static List<RawTransaction> filterByDate(List<RawTransaction> transactions, LocalDate transactionsDate) {
     return transactions
         .stream()
-        .filter(rt -> rt.getDateTime().toLocalDate().equals(transactionsDate))
+        .filter(rt -> LocalDateTime.parse(rt.getDateTime()).toLocalDate().equals(transactionsDate))
         .toList();
   }
 

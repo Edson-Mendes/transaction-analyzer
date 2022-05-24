@@ -62,7 +62,7 @@ public class ImportService {
     if (rawTransactions.isEmpty()) {
       throw new InvalidFileException("File hasn't valid transactions");
     }
-    LocalDate transactionsDate = rawTransactions.get(0).getDateTime().toLocalDate();
+    LocalDate transactionsDate = LocalDateTime.parse(rawTransactions.get(0).getDateTime()).toLocalDate();
     if (transactionsImportRepository.existsByTransactionsDate(transactionsDate)) {
       String message = String.format("Already exists a imported file for %s",
           transactionsDate.format(DateFormatter.formatter));

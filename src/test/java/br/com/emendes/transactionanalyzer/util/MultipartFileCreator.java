@@ -26,6 +26,24 @@ public class MultipartFileCreator {
     }
   }
 
+  public static MultipartFile fileWithOneTransaction() {
+    try {
+      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/singleTransactionFile.csv";
+      InputStream inputStream = new FileInputStream(path);
+
+      MultipartFile file = new MockMultipartFile(
+          "transaction.csv",
+          "singleTransactionFile.csv",
+          "text",
+          inputStream);
+
+      return file;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
+
   public static MultipartFile invalidFileType() {
     try {
       String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/filetxt.txt";
@@ -70,6 +88,42 @@ public class MultipartFileCreator {
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
           "biggerFile.csv",
+          "text",
+          inputStream);
+
+      return file;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
+
+  public static MultipartFile invalidTransaction() {
+    try {
+      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/invalidFile.csv";
+      InputStream inputStream = new FileInputStream(path);
+
+      MultipartFile file = new MockMultipartFile(
+          "transaction.csv",
+          "invalidFile.csv",
+          "text",
+          inputStream);
+
+      return file;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
+
+  public static MultipartFile fileSeparatedBySemicolon() {
+    try {
+      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/semicolonSeparator.csv";
+      InputStream inputStream = new FileInputStream(path);
+
+      MultipartFile file = new MockMultipartFile(
+          "transaction.csv",
+          "semicolonSeparator.csv",
           "text",
           inputStream);
 
