@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.emendes.transactionanalyzer.model.form.AnalysisDateForm;
+import br.com.emendes.transactionanalyzer.controller.form.AnalysisDateForm;
 
 @DisplayName("Tests for MonthNumber annotation")
 public class MonthNumberTests {
@@ -47,7 +47,7 @@ public class MonthNumberTests {
 
     Assertions.assertFalse(constraintViolations0_2022.isEmpty());
     Assertions.assertEquals(1, constraintViolations0_2022.size());
-    Assertions.assertEquals("invalid month", constraintViolations0_2022.stream().findAny().get().getMessage());
+    Assertions.assertEquals("Invalid month", constraintViolations0_2022.stream().findAny().get().getMessage());
   }
 
   @Test
@@ -60,7 +60,7 @@ public class MonthNumberTests {
 
     Assertions.assertFalse(constraintViolations13_2022.isEmpty());
     Assertions.assertEquals(1, constraintViolations13_2022.size());
-    Assertions.assertEquals("invalid month", constraintViolations13_2022.stream().findAny().get().getMessage());
+    Assertions.assertEquals("Invalid month", constraintViolations13_2022.stream().findAny().get().getMessage());
   }
 
 }

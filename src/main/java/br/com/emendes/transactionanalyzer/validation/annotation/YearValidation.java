@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = YearValidator.class)
 public @interface YearValidation {
-  String message() default "invalid year";
+  String message() default "Invalid year";
 
   Class<?>[] groups() default {};
 

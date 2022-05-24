@@ -1,4 +1,4 @@
-package br.com.emendes.transactionanalyzer.model.dto;
+package br.com.emendes.transactionanalyzer.controller.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;

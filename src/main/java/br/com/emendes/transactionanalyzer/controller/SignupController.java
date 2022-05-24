@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.emendes.transactionanalyzer.model.form.UserForm;
+import br.com.emendes.transactionanalyzer.controller.form.UserForm;
 import br.com.emendes.transactionanalyzer.service.UserService;
 import lombok.RequiredArgsConstructor;
 

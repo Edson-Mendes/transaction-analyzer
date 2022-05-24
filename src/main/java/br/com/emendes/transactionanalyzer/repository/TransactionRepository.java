@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
-import br.com.emendes.transactionanalyzer.model.dto.SuspiciousBranchDto;
+import br.com.emendes.transactionanalyzer.controller.dto.SuspiciousAccountDto;
+import br.com.emendes.transactionanalyzer.controller.dto.SuspiciousBranchDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 
 @Repository
@@ -19,7 +19,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
       @Param("month") Integer month,
       @Param("year") Integer year);
 
-  @Query("SELECT new br.com.emendes.transactionanalyzer.model.dto" +
+  @Query("SELECT new br.com.emendes.transactionanalyzer.controller.dto" +
       ".SuspiciousAccountDto(t.originAccount.branch.bank.name, " +
       "t.originAccount.branch.number, " +
       "t.originAccount.number, " +
@@ -31,7 +31,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
       @Param("month") Integer month,
       @Param("year") Integer year);
 
-  @Query("SELECT new br.com.emendes.transactionanalyzer.model.dto" +
+  @Query("SELECT new br.com.emendes.transactionanalyzer.controller.dto" +
       ".SuspiciousAccountDto(t.destinationAccount.branch.bank.name, " +
       "t.destinationAccount.branch.number, " +
       "t.destinationAccount.number, " +
@@ -43,7 +43,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
       @Param("month") Integer month,
       @Param("year") Integer year);
 
-  @Query("SELECT new br.com.emendes.transactionanalyzer.model.dto" +
+  @Query("SELECT new br.com.emendes.transactionanalyzer.controller.dto" +
       ".SuspiciousBranchDto(t.destinationAccount.branch.bank.name, " +
       "t.destinationAccount.branch.number, " +
       "SUM(t.value), 'input') " +
@@ -54,7 +54,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
       @Param("month") Integer month,
       @Param("year") Integer year);
 
-  @Query("SELECT new br.com.emendes.transactionanalyzer.model.dto" +
+  @Query("SELECT new br.com.emendes.transactionanalyzer.controller.dto" +
       ".SuspiciousBranchDto(t.originAccount.branch.bank.name, " +
       "t.originAccount.branch.number, " +
       "SUM(t.value), 'output') " +

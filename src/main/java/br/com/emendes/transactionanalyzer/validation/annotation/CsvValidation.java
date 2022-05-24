@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CsvValidator.class)
 public @interface CsvValidation {
-  String message() default "invalid file format";
+  String message() default "Invalid file format";
 
   Class<?>[] groups() default {};
 

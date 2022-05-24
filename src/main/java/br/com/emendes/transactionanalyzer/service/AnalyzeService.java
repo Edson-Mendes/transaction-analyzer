@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.emendes.transactionanalyzer.model.dto.SuspiciousAccountDto;
-import br.com.emendes.transactionanalyzer.model.dto.SuspiciousBranchDto;
-import br.com.emendes.transactionanalyzer.model.dto.TransactionDto;
+import br.com.emendes.transactionanalyzer.controller.dto.SuspiciousAccountDto;
+import br.com.emendes.transactionanalyzer.controller.dto.SuspiciousBranchDto;
+import br.com.emendes.transactionanalyzer.controller.dto.TransactionDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;

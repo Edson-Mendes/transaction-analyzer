@@ -10,11 +10,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.emendes.transactionanalyzer.controller.dto.ImportDetailsDto;
+import br.com.emendes.transactionanalyzer.controller.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.exception.ImportNotFoundException;
 import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
 import br.com.emendes.transactionanalyzer.exception.TransactionsDateAlreadyExistsException;
-import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
-import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.model.entity.Transaction;
 import br.com.emendes.transactionanalyzer.model.entity.TransactionsImport;
 import br.com.emendes.transactionanalyzer.model.entity.User;

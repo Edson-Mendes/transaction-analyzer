@@ -41,7 +41,7 @@ public class CsvValidationTests {
     Assertions.assertThat(constraintViolations.size())
         .isEqualTo(1);
     Assertions.assertThat(constraintViolations.stream().findAny().get().getMessage())
-        .isEqualTo("invalid file format");
+        .isEqualTo("Invalid file format");
   }
 
 }

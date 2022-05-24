@@ -1,4 +1,4 @@
-package br.com.emendes.transactionanalyzer.model.form;
+package br.com.emendes.transactionanalyzer.controller.form;
 
 import javax.validation.constraints.NotEmpty;
 

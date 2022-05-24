@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = MonthNumberValidator.class)
 public @interface MonthNumber {
-  String message() default "invalid month";
+  String message() default "Invalid month";
 
   Class<?>[] groups() default {};
 

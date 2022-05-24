@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = FileNotEmptyValidator.class)
 public @interface FileNotEmpty {
-  String message() default "empty file";
+  String message() default "Empty file";
 
   Class<?>[] groups() default {};
 

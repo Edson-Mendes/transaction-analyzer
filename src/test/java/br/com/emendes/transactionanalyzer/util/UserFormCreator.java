@@ -1,6 +1,6 @@
 package br.com.emendes.transactionanalyzer.util;
 
-import br.com.emendes.transactionanalyzer.model.form.UserForm;
+import br.com.emendes.transactionanalyzer.controller.form.UserForm;
 
 public class UserFormCreator {
 

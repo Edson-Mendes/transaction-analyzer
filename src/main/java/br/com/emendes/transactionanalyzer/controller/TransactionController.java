@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.emendes.transactionanalyzer.controller.dto.ImportDetailsDto;
+import br.com.emendes.transactionanalyzer.controller.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.controller.form.FileForm;
-import br.com.emendes.transactionanalyzer.model.dto.ImportDetailsDto;
-import br.com.emendes.transactionanalyzer.model.dto.TransactionsImportDto;
 import br.com.emendes.transactionanalyzer.model.util.AlertType;
 import br.com.emendes.transactionanalyzer.model.util.Message;
 import br.com.emendes.transactionanalyzer.service.ImportService;
@@ -53,13 +52,8 @@ public class TransactionController {
 
   @PostMapping
   @Transactional
-  public String submitForm(@Valid FileForm fileForm, BindingResult bindingResult, RedirectAttributes attributes,
+  public String submitForm(@Valid FileForm fileForm, RedirectAttributes attributes,
       Principal principal) {
-    if (bindingResult.hasErrors()) {
-      attributes.addFlashAttribute("message",
-          new Message(AlertType.ERROR, bindingResult.getAllErrors().get(0).getDefaultMessage()));
-      return "redirect:/transactions";
-    }
     importService.processImport(fileForm.getFile(), principal.getName());
 
     final Message message = Message.builder()

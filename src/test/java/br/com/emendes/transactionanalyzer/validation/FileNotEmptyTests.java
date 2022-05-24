@@ -30,7 +30,7 @@ public class FileNotEmptyTests {
     Assertions.assertThat(constraintViolations.size())
         .isEqualTo(1);
     Assertions.assertThat(constraintViolations.stream().findAny().get().getMessage())
-        .isEqualTo("empty file");
+        .isEqualTo("Empty file");
   }
 
   @Test

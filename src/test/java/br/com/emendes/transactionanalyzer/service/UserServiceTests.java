@@ -16,13 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.emendes.transactionanalyzer.controller.dto.UserDto;
+import br.com.emendes.transactionanalyzer.controller.form.UpdateUserForm;
+import br.com.emendes.transactionanalyzer.controller.form.UserForm;
 import br.com.emendes.transactionanalyzer.exception.EmailAlreadyRegisteredException;
 import br.com.emendes.transactionanalyzer.exception.UserNotFoundException;
-import br.com.emendes.transactionanalyzer.model.dto.UserDto;
 import br.com.emendes.transactionanalyzer.model.entity.Authority;
 import br.com.emendes.transactionanalyzer.model.entity.User;
-import br.com.emendes.transactionanalyzer.model.form.UpdateUserForm;
-import br.com.emendes.transactionanalyzer.model.form.UserForm;
 import br.com.emendes.transactionanalyzer.repository.UserRepository;
 import br.com.emendes.transactionanalyzer.util.UpdateUserFormCreator;
 import br.com.emendes.transactionanalyzer.util.UserCreator;

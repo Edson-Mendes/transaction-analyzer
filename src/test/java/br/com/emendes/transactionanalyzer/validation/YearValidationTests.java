@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.emendes.transactionanalyzer.model.form.AnalysisDateForm;
+import br.com.emendes.transactionanalyzer.controller.form.AnalysisDateForm;
 
 @DisplayName("Tests for YearValidation annotation")
 public class YearValidationTests {
@@ -47,7 +47,7 @@ public class YearValidationTests {
 
     Assertions.assertFalse(constraintViolations999.isEmpty());
     Assertions.assertEquals(1, constraintViolations999.size());
-    Assertions.assertEquals("invalid year", constraintViolations999.stream().findAny().get().getMessage());
+    Assertions.assertEquals("Invalid year", constraintViolations999.stream().findAny().get().getMessage());
   }
 
   @Test
@@ -59,7 +59,7 @@ public class YearValidationTests {
 
     Assertions.assertFalse(constraintViolations10000.isEmpty());
     Assertions.assertEquals(1, constraintViolations10000.size());
-    Assertions.assertEquals("invalid year", constraintViolations10000.stream().findAny().get().getMessage());
+    Assertions.assertEquals("Invalid year", constraintViolations10000.stream().findAny().get().getMessage());
   }
 
 }

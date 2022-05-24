@@ -1,6 +1,6 @@
-package br.com.emendes.transactionanalyzer.model.form;
+package br.com.emendes.transactionanalyzer.controller.form;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateUserForm {
 
-  @NotEmpty
-  @Size(min = 3, max = 20)
+  @NotBlank(message = "Name can not be blank")
+  @Size(min = 3, max = 20, message = "Size name must be between 3 and 20")
   private String name;
 
   private String email;
