@@ -1,8 +1,9 @@
 server:
   error:
     include-stacktrace: on-param
+    include-binding-errors: always
 
 spring: 
   profiles:
     active:
-    - dev
+    - test

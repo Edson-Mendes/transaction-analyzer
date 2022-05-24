@@ -15,13 +15,6 @@
         required
         th:field="*{name}"
       />
-      <div
-        th:if="${#fields.hasErrors('name')}"
-        th:errors="*{name}"
-        class="text-danger"
-      >
-        Name Error
-      </div>
     </div>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email address</label>
@@ -32,13 +25,6 @@
         required
         th:field="*{email}"
       />
-      <div
-        th:if="${#fields.hasErrors('email')}"
-        th:errors="*{email}"
-        class="text-danger"
-      >
-        Email Error
-      </div>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>

@@ -4,7 +4,9 @@
     class="row g-2"
     method="post"
     enctype="multipart/form-data"
-    action="/transactions"
+    action="#"
+    th:action="@{/transactions}"
+    th:object="${fileForm}"
   >
     <div>
       <input
@@ -12,6 +14,7 @@
         id="formFile"
         type="file"
         name="file"
+        th:field="*{file}"
         accept=".csv"
         required
       />

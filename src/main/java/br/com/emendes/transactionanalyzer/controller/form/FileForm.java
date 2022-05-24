@@ -20,6 +20,7 @@ public class FileForm {
   @CsvValidation
   @FileNotEmpty
   @MaxSizeFile(size = 131072l)
+  // Tamanho max de arquivo suportado está em 128KB.
   private MultipartFile file;
 
 }
