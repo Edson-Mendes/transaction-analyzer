@@ -3,6 +3,7 @@ package br.com.emendes.transactionanalyzer.validation;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+// FIXME DELETAR
 public abstract class ValueValidator {
 
   /**

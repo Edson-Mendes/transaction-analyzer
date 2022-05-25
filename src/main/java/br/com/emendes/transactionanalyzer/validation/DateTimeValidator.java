@@ -2,6 +2,7 @@ package br.com.emendes.transactionanalyzer.validation;
 
 import java.time.LocalDateTime;
 
+// FIXME: DELETAR
 public abstract class DateTimeValidator {
 
   /**
@@ -24,7 +25,6 @@ public abstract class DateTimeValidator {
     try {
       LocalDateTime localDateTime = LocalDateTime.parse(dateTime);
 
-      // LocalDateTime minDateTime = LocalDateTime.parse("1970-01-01T00:00:00");
       LocalDateTime minDateTime = LocalDateTime.of(1970, 01, 01, 00, 00, 00);
       LocalDateTime maxDateTime = LocalDateTime.of(2099, 12, 31, 23, 59, 59);
 

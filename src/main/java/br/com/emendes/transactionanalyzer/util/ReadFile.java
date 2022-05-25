@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.emendes.transactionanalyzer.exception.CouldNotReadFileException;
 import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
 
+// FIXME: DELETAR
 public abstract class ReadFile {
 
   /**

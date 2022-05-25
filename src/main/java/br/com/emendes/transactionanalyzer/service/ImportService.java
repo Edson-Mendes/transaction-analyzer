@@ -21,7 +21,6 @@ import br.com.emendes.transactionanalyzer.model.entity.User;
 import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
-import br.com.emendes.transactionanalyzer.util.ReadFile;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -31,6 +30,7 @@ public class ImportService {
   private final TransactionsImportRepository transactionsImportRepository;
   private final UserService userService;
   private final TransactionService transactionService;
+  private final CsvService csvService;
 
   private void save(TransactionsImport transactionsImport) {
     transactionsImportRepository.save(transactionsImport);
@@ -55,9 +55,8 @@ public class ImportService {
   }
 
   public void processImport(MultipartFile file, String email) {
-    List<String> transactionLines = ReadFile.readMultipartFile(file);
 
-    List<RawTransaction> rawTransactions = RawTransaction.fromTransactionsLines(transactionLines);
+    List<RawTransaction> rawTransactions = csvService.readFile(file);
 
     if (rawTransactions.isEmpty()) {
       throw new InvalidFileException("File hasn't valid transactions");

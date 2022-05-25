@@ -1,5 +1,6 @@
 package br.com.emendes.transactionanalyzer.validation;
 
+// FIXME: DELETAR, provavelmente não vou usar mais.
 public abstract class TransactionValidator {
 
   /**

@@ -7,15 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.mock.web.MockMultipartFile;
 
 public class MultipartFileCreator {
+  public static String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/";
 
   public static MultipartFile validFile() {
+    String fileName = "validFile.csv";
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/validFile.csv";
-      InputStream inputStream = new FileInputStream(path);
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
-          "validFile.csv",
+          fileName,
           "text",
           inputStream);
 
@@ -28,12 +29,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile fileWithOneTransaction() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/singleTransactionFile.csv";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "singleTransactionFile.csv";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
-          "singleTransactionFile.csv",
+          fileName,
           "text",
           inputStream);
 
@@ -46,12 +47,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile invalidFileType() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/filetxt.txt";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "filetxt.txt";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "filetxt.txt",
-          "filetxt.txt",
+          fileName,
           "text",
           inputStream);
 
@@ -64,12 +65,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile emptyFile() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/emptyFile.csv";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "emptyFile.csv";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "emptyFile.csv",
-          "emptyFile.csv",
+          fileName,
           "text",
           inputStream);
 
@@ -82,12 +83,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile biggerFile() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/biggerFile.csv";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "biggerFile.csv";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
-          "biggerFile.csv",
+          fileName,
           "text",
           inputStream);
 
@@ -100,12 +101,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile invalidTransaction() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/invalidFile.csv";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "invalidFile.csv";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
-          "invalidFile.csv",
+          fileName,
           "text",
           inputStream);
 
@@ -118,12 +119,12 @@ public class MultipartFileCreator {
 
   public static MultipartFile fileSeparatedBySemicolon() {
     try {
-      String path = "src/test/java/br/com/emendes/transactionanalyzer/util/file/semicolonSeparator.csv";
-      InputStream inputStream = new FileInputStream(path);
+      String fileName = "semicolonSeparator.csv";
+      InputStream inputStream = new FileInputStream(path + fileName);
 
       MultipartFile file = new MockMultipartFile(
           "transaction.csv",
-          "semicolonSeparator.csv",
+          fileName,
           "text",
           inputStream);
 
