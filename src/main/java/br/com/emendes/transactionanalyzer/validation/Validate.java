@@ -1,4 +1,4 @@
-package br.com.emendes.transactionanalyzer.util;
+package br.com.emendes.transactionanalyzer.validation;
 
 import java.util.Set;
 

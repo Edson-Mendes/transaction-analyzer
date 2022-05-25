@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
-import br.com.emendes.transactionanalyzer.util.Validate;
 import br.com.emendes.transactionanalyzer.util.creator.RawTransactionCreator;
 
 @DisplayName("Tests for Validate<E>")

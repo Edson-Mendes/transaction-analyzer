@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import br.com.emendes.transactionanalyzer.validation.validator.MaxSizeFileValidator;
+
 /**
  * The annotated element must have a size less or equal than {@code size}Bytes
  * <p>
@@ -20,7 +22,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = MaxSizeFileValidator.class)
 public @interface MaxSizeFile {
-  String message() default "file bigger than max size";
+  String message() default "File bigger than max size";
 
   long size() default 10240l;
 

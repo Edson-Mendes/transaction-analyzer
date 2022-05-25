@@ -1,7 +1,9 @@
-package br.com.emendes.transactionanalyzer.validation.annotation;
+package br.com.emendes.transactionanalyzer.validation.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import br.com.emendes.transactionanalyzer.validation.annotation.YearValidation;
 
 public class YearValidator implements ConstraintValidator<YearValidation, String> {
   @Override

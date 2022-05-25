@@ -1,15 +1,15 @@
 package br.com.emendes.transactionanalyzer.model.util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import br.com.emendes.transactionanalyzer.validation.TransactionValidator;
 import br.com.emendes.transactionanalyzer.validation.annotation.DateTimeValidation;
 import br.com.emendes.transactionanalyzer.validation.annotation.ValueValidation;
 import lombok.AllArgsConstructor;
@@ -62,49 +62,16 @@ public class RawTransaction {
   @DateTimeValidation
   private String dateTime;
 
-  // FIXME: DELETAR, provavelmente não vou usar mais.
-  public RawTransaction(String transactionLine) {
-    String[] fields = transactionLine.split(",");
-
-    this.originBank = fields[0];
-    this.originBranch = fields[1];
-    this.originAccount = fields[2];
-
-    this.destinationBank = fields[3];
-    this.destinationBranch = fields[4];
-    this.destinationAccount = fields[5];
-
-    this.value = fields[6];
-    this.dateTime = fields[7];
+  public BigDecimal getValueAsBigDecimal() {
+    return new BigDecimal(this.value).setScale(2, RoundingMode.DOWN);
   }
 
-  /**
-   * Filtra e converte uma lista de string (transações) em uma lista de
-   * RawTransaction
-   */
-  // FIXME: DELETAR, provavelmente não vou usar mais.
-  public static List<RawTransaction> fromTransactionsLines(List<String> transactionLines) {
-    List<RawTransaction> transactions = transactionLines
-        .stream()
-        .filter(tl -> TransactionValidator.validate(tl))
-        .map(tlv -> new RawTransaction(tlv))
-        .toList();
-
-    return transactions;
+  public LocalDateTime getDateTimeAsLocalDateTime() {
+    return LocalDateTime.parse(this.dateTime);
   }
 
-  /**
-   * Filtra transações por data
-   * 
-   * @param transactions     lista de transações a serem filtradas
-   * @param transactionsDate data válida
-   * @return Lista filtrada de transações
-   */
-  public static List<RawTransaction> filterByDate(List<RawTransaction> transactions, LocalDate transactionsDate) {
-    return transactions
-        .stream()
-        .filter(rt -> LocalDateTime.parse(rt.getDateTime()).toLocalDate().equals(transactionsDate))
-        .toList();
+  public LocalDate getDate() {
+    return getDateTimeAsLocalDateTime().toLocalDate();
   }
 
 }

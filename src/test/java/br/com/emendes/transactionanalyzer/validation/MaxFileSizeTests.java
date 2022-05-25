@@ -30,7 +30,7 @@ public class MaxFileSizeTests {
     Assertions.assertThat(constraintViolations.size())
         .isEqualTo(1);
     Assertions.assertThat(constraintViolations.stream().findAny().get().getMessage())
-        .isEqualTo("file bigger than max size");
+        .isEqualTo("File bigger than max size");
   }
 
   @Test

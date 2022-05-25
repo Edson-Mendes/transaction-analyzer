@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import br.com.emendes.transactionanalyzer.validation.validator.FileNotEmptyValidator;
+
 /**
  * The annotated element must not be {@code empty file}.
  * <p>
