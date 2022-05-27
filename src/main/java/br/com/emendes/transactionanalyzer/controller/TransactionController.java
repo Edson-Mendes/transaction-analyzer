@@ -54,7 +54,7 @@ public class TransactionController {
   @Transactional
   public String submitForm(@Valid FileForm fileForm, RedirectAttributes attributes,
       Principal principal) {
-    importService.processImport(fileForm.getFile(), principal.getName());
+    importService.processImport(fileForm, principal.getName());
 
     final Message message = Message.builder()
         .type(AlertType.SUCCESS)

@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.emendes.transactionanalyzer.controller.dto.ImportDetailsDto;
 import br.com.emendes.transactionanalyzer.controller.dto.TransactionsImportDto;
+import br.com.emendes.transactionanalyzer.controller.form.FileForm;
 import br.com.emendes.transactionanalyzer.exception.ImportNotFoundException;
 import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
 import br.com.emendes.transactionanalyzer.exception.TransactionsDateAlreadyExistsException;
@@ -20,6 +20,8 @@ import br.com.emendes.transactionanalyzer.model.entity.TransactionsImport;
 import br.com.emendes.transactionanalyzer.model.entity.User;
 import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
 import br.com.emendes.transactionanalyzer.repository.TransactionsImportRepository;
+import br.com.emendes.transactionanalyzer.service.component.CsvTransactionReader;
+import br.com.emendes.transactionanalyzer.service.component.TransactionReader;
 import br.com.emendes.transactionanalyzer.util.DateFormatter;
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +33,8 @@ public class ImportService {
   private final UserService userService;
   private final TransactionService transactionService;
   private final RawTransactionService rawTransactionService;
-  private final CsvService csvService;
+  private final CsvTransactionReader csvTransactionReader;
+  private final FileService fileService;
 
   private void save(TransactionsImport transactionsImport) {
     transactionsImportRepository.save(transactionsImport);
@@ -55,10 +58,12 @@ public class ImportService {
     return new ImportDetailsDto(transactionsImport);
   }
 
-  public void processImport(MultipartFile file, String email) {
+  public void processImport(FileForm fileForm, String email) {
+
+    TransactionReader transactionReader = selectTransactionReader(fileForm);
 
     List<RawTransaction> rawTransactions = rawTransactionService
-        .filterByValidation(csvService.readFile(file));
+        .filterByValidation(fileService.readFile(fileForm.getFile(), transactionReader));
 
     LocalDate transactionsDate = rawTransactionService.getFisrtDate(rawTransactions);
 
@@ -86,6 +91,15 @@ public class ImportService {
         .build();
 
     save(transactionsImport);
+  }
+
+  private TransactionReader selectTransactionReader(FileForm fileForm) {
+    switch (fileForm.getFileExtension()) {
+      case "csv":
+        return this.csvTransactionReader;
+      default:
+        throw new IllegalArgumentException("Inválid file extension");
+    }
   }
 
 }
