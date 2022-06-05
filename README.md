@@ -35,6 +35,7 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `Bootstrap`
 - `MySQL`
 - `JUnit 5`
+- `Mockito`
 
 ## :hammer_and_wrench: Deploy
 O deploy da aplicação foi realizado no **Heroku**, você pode testar/brincar/usar [aqui](https://transactions-analyzer-app.herokuapp.com), fique a vontade para usar o login **admin@email.com.br** e senha **123999**
@@ -43,6 +44,8 @@ OBS: As aplicações que usam conta gratuita do heroku *adormecem* se ficarem in
 
 ## :gear: Atualizações futuras
 - [ ] Suporte a upload de arquivos em formato XML
-- [ ] Testes automatizados
+- [x] Testes automatizados
 - [ ] Responsividade das páginas
 - [ ] Possibilidade de alterar senha
+- [ ] Aba para exemplificar o formato dos dados
+- [ ] Aba para mostrar bancos salvos no sistema
