@@ -14,12 +14,22 @@ O projeto foi proposto pela Alura no Challenge Backend 3ª edição.
 - `Autenticação de usuário`
   - `Login`: Login de usuário informando email e senha.
   - `Cadastrar usuário`: Usuários autenticados podem cadastrar outros usuários, cadastrando nome e email, a senha é gerada automaticamente e enviada para o email cadastrado.
+  <hr/>
 - `Importação de arquivo de transações`: Arquivos do tipo .csv contendo transações financeiras podem ser enviados, o arquivo enviado passa por uma série de validações, sendo salvo apenas as transações com informações válidas.
+  
+  - `Formato do Arquivo CSV:` ```BANCO_ORIGEM;AGÊNCIA_ORIGEM;CONTA_ORIGEM;BANCO_DESTINO;AGÊNCIA_DESTINO;CONTA_DESTINO;VALOR;HORA_E_DATA``` 
+  - `Exemplo:` ```BANCO BRADESCO;0055;12345-6;NUBANK;0001;00001-1;80000;2022-09-22T11:32:00```
+  <hr/>
 - `Histórico de importações`: Um histórico de importações realizadas é mostrado na tela principal da aplicação.
+  <hr/>
 - `Detalhes de cada importação`: Apartir do histórico de importações pode-se acessar os detalhes de cada arquivo importado, como: data de importação, quem importou, data das transações, e uma lista de todas as transações de tal arquivo.
+  <hr/>
 - `Editar usuário`: Usuários autenticados podem editar informações de outros usuários.
+  <hr/>
 - `Deletar usuário`: Usuários autenticados podem desabilitar o acesso de outros usuário, usuário NÃO podem se auto desabilitar.
+  <hr/>
 - `Lista de usuários`: Uma tela para mostrar todos os usuários cadastrados e suas informações, assim como os botões de *EDITAR* e *DELETAR*.
+  <hr/>
 - `Análise de transações`: Uma tela para o usuário informar o mês e ano que deseja a análise, a aplicação mostra as transações suspeitas (transações igual ou superior a R$100.000,00), contas suspeitas (Se o somatório de movimentações no mês for superior a R$1.000.000,00) e agências suspeitas (Se o somatório de movimentações no mês for superior a R$1.000.000.000,00).
 
 ## :toolbox: Tecnologias
