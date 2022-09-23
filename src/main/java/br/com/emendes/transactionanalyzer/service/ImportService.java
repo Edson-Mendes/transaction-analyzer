@@ -33,8 +33,6 @@ public class ImportService {
   private final UserService userService;
   private final TransactionService transactionService;
   private final RawTransactionService rawTransactionService;
-  private final CsvTransactionReader csvTransactionReader;
-  private final FileService fileService;
 
   private void save(TransactionsImport transactionsImport) {
     transactionsImportRepository.save(transactionsImport);
@@ -59,12 +57,7 @@ public class ImportService {
   }
 
   public void processImport(FileForm fileForm, String email) {
-
-    TransactionReader transactionReader = selectTransactionReader(fileForm);
-
-    List<RawTransaction> rawTransactions = rawTransactionService
-        .filterByValidation(fileService.readFile(fileForm.getFile(), transactionReader));
-
+    List<RawTransaction> rawTransactions = rawTransactionService.getFilteredRawTransactions(fileForm);
     LocalDate transactionsDate = rawTransactionService.getFisrtDate(rawTransactions);
 
     if (transactionsImportRepository.existsByTransactionsDate(transactionsDate)) {
@@ -72,10 +65,8 @@ public class ImportService {
           transactionsDate.format(DateFormatter.formatter));
       throw new TransactionsDateAlreadyExistsException(message);
     }
-    List<RawTransaction> filteredRawTransactions = rawTransactionService.filterByDate(transactionsDate,
-        rawTransactions);
 
-    List<Transaction> transactions = transactionService.generateTransactionsList(filteredRawTransactions);
+    List<Transaction> transactions = transactionService.generateTransactionsList(rawTransactions);
 
     if (transactions.isEmpty()) {
       throw new InvalidFileException("File hasn't valid transactions");
@@ -91,15 +82,6 @@ public class ImportService {
         .build();
 
     save(transactionsImport);
-  }
-
-  private TransactionReader selectTransactionReader(FileForm fileForm) {
-    switch (fileForm.getFileExtension()) {
-      case "csv":
-        return this.csvTransactionReader;
-      default:
-        throw new IllegalArgumentException("Inválid file extension");
-    }
   }
 
 }

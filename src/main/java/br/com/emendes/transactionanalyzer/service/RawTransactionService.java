@@ -1,36 +1,40 @@
 package br.com.emendes.transactionanalyzer.service;
 
+import br.com.emendes.transactionanalyzer.controller.form.FileForm;
+import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
+import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
+import br.com.emendes.transactionanalyzer.service.component.CsvTransactionReader;
+import br.com.emendes.transactionanalyzer.service.component.TransactionReader;
+import br.com.emendes.transactionanalyzer.validation.Validate;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
-import br.com.emendes.transactionanalyzer.exception.InvalidFileException;
-import br.com.emendes.transactionanalyzer.model.util.RawTransaction;
-import br.com.emendes.transactionanalyzer.validation.Validate;
 
 @Service
+@AllArgsConstructor
 public class RawTransactionService {
 
-  private final Validate<RawTransaction> validateRawTransaction = new Validate<RawTransaction>();
+  private final Validate<RawTransaction> validateRawTransaction = new Validate<>();
+  private final FileService fileService;
+  public List<RawTransaction> getFilteredRawTransactions(FileForm fileForm){
+    List<RawTransaction> rawTransactions = fileService
+        .readFile(fileForm.getFile(), selectTransactionReader(fileForm));
 
-  /**
-   * Filtra a lista de rawTransactions de acordo com bean validation.
-   * 
-   * @param rawTransactions
-   * @return {@code List<RawTransaction>} de rawTransactions válidos
-   * @throws InvalidFileException se a lista a ser retornada estiver vazia.
-   */
-  public List<RawTransaction> filterByValidation(List<RawTransaction> rawTransactions) {
+    return filter(rawTransactions);
+  }
+
+  private List<RawTransaction> filter(List<RawTransaction> rawTransactions){
     List<RawTransaction> filteredRawTransactions = rawTransactions.stream()
-        .filter(rt -> validateRawTransaction.isValid(rt))
-        .collect(Collectors.toList());
+        .filter(validateRawTransaction::isValid).toList();
 
-    if (filteredRawTransactions.isEmpty()) {
-      throw new InvalidFileException("File hasn't valid transactions");
-    }
+    LocalDate transactionsDate = getFisrtDate(filteredRawTransactions);
+
+    filteredRawTransactions = filteredRawTransactions.stream()
+        .filter(rt -> datesMatch(rt, transactionsDate)).toList();
+
     return filteredRawTransactions;
   }
 
@@ -41,10 +45,16 @@ public class RawTransactionService {
     return rawTransactions.get(0).getDate();
   }
 
-  public List<RawTransaction> filterByDate(LocalDate transactionsDate, List<RawTransaction> rawTransactions) {
-    return rawTransactions
-        .stream()
-        .filter(rt -> LocalDateTime.parse(rt.getDateTime()).toLocalDate().equals(transactionsDate))
-        .toList();
+  private boolean datesMatch(RawTransaction rawTransaction, LocalDate date){
+    return LocalDateTime.parse(rawTransaction.getDateTime()).toLocalDate().equals(date);
+  }
+
+  private TransactionReader selectTransactionReader(FileForm fileForm) {
+    switch (fileForm.getFileExtension()) {
+      case "csv":
+        return new CsvTransactionReader();
+      default:
+        throw new IllegalArgumentException("Inválid file extension");
+    }
   }
 }
